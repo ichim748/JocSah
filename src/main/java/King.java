@@ -41,7 +41,6 @@ public class King extends Piece{
         deReturnat.add(board.getBox(start.getX() - 1, start.getY()));
         deReturnat.add(board.getBox(start.getX() - 1, start.getY() + 1));
         deReturnat.add(board.getBox(start.getX(), start.getY() - 1));
-        deReturnat.add(board.getBox(start.getX(), start.getY()));
         deReturnat.add(board.getBox(start.getX(), start.getY() + 1));
         deReturnat.add(board.getBox(start.getX() + 1, start.getY() - 1));
         deReturnat.add(board.getBox(start.getX() + 1, start.getY()));
