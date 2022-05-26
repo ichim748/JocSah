@@ -50,7 +50,7 @@ public class Pawn extends Piece{
     @Override
     public List<Square> possibleMoves(Board board, Square box) throws Exception {
         List<Square> deReturnat = new ArrayList<>();
-
+        //Daca e pe casuta de start => poate merge 2 casute
         if (this.isWhite()){
             if (box.getY() <= 6){
                 deReturnat.add(board.getBox(box.getX(), box.getY()+1));
