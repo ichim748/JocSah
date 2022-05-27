@@ -56,6 +56,9 @@ public class Queen extends Piece{
         tempY--;
         while (tempX >= 0 && tempY >= 0){
             if (board.getBox(tempX, tempY).getPiece() != null){
+                if (board.getBox(tempX, tempY).getPiece().isWhite() != this.isWhite()){
+                    deReturnat.add(board.getBox(tempX, tempY));
+                }
                 break;
             }
             deReturnat.add(board.getBox(tempX, tempY));
@@ -68,6 +71,9 @@ public class Queen extends Piece{
         tempY--;
         while (tempY >= 0 && tempX <= 7){
             if (board.getBox(tempX, tempY).getPiece() != null){
+                if (board.getBox(tempX, tempY).getPiece().isWhite() != this.isWhite()){
+                    deReturnat.add(board.getBox(tempX, tempY));
+                }
                 break;
             }
             deReturnat.add(board.getBox(tempX, tempY));
@@ -80,6 +86,9 @@ public class Queen extends Piece{
         tempY++;
         while (tempX >= 0 && tempY <= 7){
             if (board.getBox(tempX, tempY).getPiece() != null){
+                if (board.getBox(tempX, tempY).getPiece().isWhite() != this.isWhite()){
+                    deReturnat.add(board.getBox(tempX, tempY));
+                }
                 break;
             }
             deReturnat.add(board.getBox(tempX, tempY));
@@ -92,6 +101,9 @@ public class Queen extends Piece{
         tempY++;
         while (tempX <= 7 && tempY <= 7){
             if (board.getBox(tempX, tempY).getPiece() != null){
+                if (board.getBox(tempX, tempY).getPiece().isWhite() != this.isWhite()){
+                    deReturnat.add(board.getBox(tempX, tempY));
+                }
                 break;
             }
             deReturnat.add(board.getBox(tempX, tempY));
@@ -104,6 +116,9 @@ public class Queen extends Piece{
         tempX--;
         while (tempX >= 0){
             if (board.getBox(tempX, tempY).getPiece() != null){
+                if (board.getBox(tempX, tempY).getPiece().isWhite() != this.isWhite()){
+                    deReturnat.add(board.getBox(tempX, tempY));
+                }
                 break;
             }
             deReturnat.add(board.getBox(tempX, tempY));
@@ -114,6 +129,9 @@ public class Queen extends Piece{
         tempY--;
         while (tempY >= 0){
             if (board.getBox(tempX, tempY).getPiece() != null){
+                if (board.getBox(tempX, tempY).getPiece().isWhite() != this.isWhite()){
+                    deReturnat.add(board.getBox(tempX, tempY));
+                }
                 break;
             }
             deReturnat.add(board.getBox(tempX, tempY));
@@ -124,6 +142,9 @@ public class Queen extends Piece{
         tempX++;
         while (tempX <= 7){
             if (board.getBox(tempX, tempY).getPiece() != null){
+                if (board.getBox(tempX, tempY).getPiece().isWhite() != this.isWhite()){
+                    deReturnat.add(board.getBox(tempX, tempY));
+                }
                 break;
             }
             deReturnat.add(board.getBox(tempX, tempY));
@@ -134,6 +155,9 @@ public class Queen extends Piece{
         tempY++;
         while (tempY <= 7){
             if (board.getBox(tempX, tempY).getPiece() != null){
+                if (board.getBox(tempX, tempY).getPiece().isWhite() != this.isWhite()){
+                    deReturnat.add(board.getBox(tempX, tempY));
+                }
                 break;
             }
             deReturnat.add(board.getBox(tempX, tempY));

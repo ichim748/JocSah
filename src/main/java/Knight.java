@@ -51,34 +51,34 @@ public class Knight extends Piece{
     public List<Square> possibleMoves(Board board, Square box) throws Exception {
         List<Square> deReturnat = new ArrayList<>();
         if (box.getY() >= 2){
-            if (box.getX() >= 1){
+            if (box.getX() >= 1 && (board.getBox(box.getX() - 1, box.getY()-2).getPiece() == null || board.getBox(box.getX() - 1, box.getY()-2).getPiece().isWhite()!= this.isWhite())){
                 deReturnat.add(board.getBox(box.getX() - 1, box.getY()-2));
             }
-            if (box.getX() <= 6){
+            if (box.getX() <= 6 && (board.getBox(box.getX() + 1, box.getY()-2).getPiece() == null || board.getBox(box.getX() + 1, box.getY()-2).getPiece().isWhite()!= this.isWhite())){
                 deReturnat.add(board.getBox(box.getX() + 1, box.getY()-2));
             }
         }
         if (box.getY() >= 1){
-            if (box.getX() >= 2){
+            if (box.getX() >= 2 && (board.getBox(box.getX() - 2, box.getY()-1).getPiece() == null || board.getBox(box.getX() - 2, box.getY()-1).getPiece().isWhite()!= this.isWhite())){
                 deReturnat.add(board.getBox(box.getX() - 2, box.getY()-1));
             }
-            if (box.getX() <= 5){
+            if (box.getX() <= 5 && (board.getBox(box.getX() + 1, box.getY()-1).getPiece() == null || board.getBox(box.getX() + 2, box.getY()-1).getPiece().isWhite()!= this.isWhite())){
                 deReturnat.add(board.getBox(box.getX() + 2, box.getY()-1));
             }
         }
         if (box.getY() <= 5){
-            if (box.getX() >= 1){
+            if (box.getX() >= 1 && (board.getBox(box.getX() - 1, box.getY()+2).getPiece() == null || board.getBox(box.getX() - 1, box.getY()+2).getPiece().isWhite()!= this.isWhite())){
                 deReturnat.add(board.getBox(box.getX() - 1, box.getY()+2));
             }
-            if (box.getX() <= 6){
+            if (box.getX() <= 6 && (board.getBox(box.getX() + 1, box.getY()+2).getPiece() == null || board.getBox(box.getX() + 1, box.getY()+2).getPiece().isWhite()!= this.isWhite())){
                 deReturnat.add(board.getBox(box.getX() + 1, box.getY()+2));
             }
         }
         if (box.getY() <= 6){
-            if (box.getX() >= 2){
+            if (box.getX() >= 2 && (board.getBox(box.getX() - 2, box.getY()+1).getPiece() == null || board.getBox(box.getX() - 2, box.getY()+1).getPiece().isWhite()!= this.isWhite())){
                 deReturnat.add(board.getBox(box.getX() - 2, box.getY()+1));
             }
-            if (box.getX() <= 5){
+            if (box.getX() <= 5 && (board.getBox(box.getX() + 2, box.getY()+1).getPiece() == null || board.getBox(box.getX() +2, box.getY() + 1).getPiece().isWhite()!= this.isWhite())){
                 deReturnat.add(board.getBox(box.getX() + 2, box.getY()+1));
             }
         }

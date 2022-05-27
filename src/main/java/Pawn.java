@@ -52,23 +52,29 @@ public class Pawn extends Piece{
         List<Square> deReturnat = new ArrayList<>();
         //Daca e pe casuta de start => poate merge 2 casute
         if (this.isWhite()){
-            if (box.getY() <= 6){
-                deReturnat.add(board.getBox(box.getX(), box.getY()+1));
-                if (box.getX() >= 1 && (board.getBox(box.getX()-1, box.getY()+1).getPiece() != null || (board.getBox(box.getX()-1, box.getY()).getPiece().getClass().getSimpleName().equals("Pawn") && board.getBox(box.getX()-1, box.getY()).getPiece().isWhite() != this.isWhite() && box.getY() == 3))){
-                    deReturnat.add(board.getBox(box.getX()-1, box.getY()+1));
-                }
-                if (box.getX() <= 6 && (board.getBox(box.getX()+1, box.getY()+1).getPiece() != null || (board.getBox(box.getX()+1, box.getY()).getPiece().getClass().getSimpleName().equals("Pawn") && board.getBox(box.getX()+1, box.getY()).getPiece().isWhite() != this.isWhite() && box.getY() == 3))){
-                    deReturnat.add(board.getBox(box.getX()+1, box.getY()+1));
-                }
+            if (box.getY() == 6){
+                deReturnat.add(board.getBox(box.getX(), box.getY()-2));
             }
-        }
-        else{
             if (box.getY() >= 1){
                 deReturnat.add(board.getBox(box.getX(), box.getY()-1));
                 if (box.getX() >= 1 && (board.getBox(box.getX()-1, box.getY()-1).getPiece() != null || (board.getBox(box.getX()-1, box.getY()).getPiece().getClass().getSimpleName().equals("Pawn") && board.getBox(box.getX()-1, box.getY()).getPiece().isWhite() != this.isWhite() && box.getY() == 4))){
                     deReturnat.add(board.getBox(box.getX()-1, box.getY()+1));
                 }
                 if (box.getX() <= 6 && (board.getBox(box.getX()+1, box.getY()-1).getPiece() != null || (board.getBox(box.getX()+1, box.getY()).getPiece().getClass().getSimpleName().equals("Pawn") && board.getBox(box.getX()+1, box.getY()).getPiece().isWhite() != this.isWhite() && box.getY() == 4))){
+                    deReturnat.add(board.getBox(box.getX()+1, box.getY()+1));
+                }
+            }
+        }
+        else{
+            if (box.getY() == 1){
+                deReturnat.add(board.getBox(box.getX(), box.getY()+2));
+            }
+            if (box.getY() <= 6){
+                deReturnat.add(board.getBox(box.getX(), box.getY()+1));
+                if (box.getX() >= 1 && (board.getBox(box.getX()-1, box.getY()+1).getPiece() != null || (board.getBox(box.getX()-1, box.getY()).getPiece().getClass().getSimpleName().equals("Pawn") && board.getBox(box.getX()-1, box.getY()).getPiece().isWhite() != this.isWhite() && box.getY() == 3))){
+                    deReturnat.add(board.getBox(box.getX()-1, box.getY()+1));
+                }
+                if (box.getX() <= 6 && (board.getBox(box.getX()+1, box.getY()+1).getPiece() != null || (board.getBox(box.getX()+1, box.getY()).getPiece().getClass().getSimpleName().equals("Pawn") && board.getBox(box.getX()+1, box.getY()).getPiece().isWhite() != this.isWhite() && box.getY() == 3))){
                     deReturnat.add(board.getBox(box.getX()+1, box.getY()+1));
                 }
             }

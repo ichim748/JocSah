@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Rook extends Piece{
+    private boolean hasBeenMoved = false;
 
     public Rook(boolean white){
         super(white);
@@ -56,6 +57,9 @@ public class Rook extends Piece{
         tempX--;
         while (tempX >= 0){
             if (board.getBox(tempX, tempY).getPiece() != null){
+                if (board.getBox(tempX, tempY).getPiece().isWhite() != this.isWhite()){
+                    deReturnat.add(board.getBox(tempX, tempY));
+                }
                 break;
             }
             deReturnat.add(board.getBox(tempX, tempY));
@@ -66,6 +70,9 @@ public class Rook extends Piece{
         tempY--;
         while (tempY >= 0){
             if (board.getBox(tempX, tempY).getPiece() != null){
+                if (board.getBox(tempX, tempY).getPiece().isWhite() != this.isWhite()){
+                    deReturnat.add(board.getBox(tempX, tempY));
+                }
                 break;
             }
             deReturnat.add(board.getBox(tempX, tempY));
@@ -76,6 +83,9 @@ public class Rook extends Piece{
         tempX++;
         while (tempX <= 7){
             if (board.getBox(tempX, tempY).getPiece() != null){
+                if (board.getBox(tempX, tempY).getPiece().isWhite() != this.isWhite()){
+                    deReturnat.add(board.getBox(tempX, tempY));
+                }
                 break;
             }
             deReturnat.add(board.getBox(tempX, tempY));
@@ -86,12 +96,56 @@ public class Rook extends Piece{
         tempY++;
         while (tempY <= 7){
             if (board.getBox(tempX, tempY).getPiece() != null){
+                if (board.getBox(tempX, tempY).getPiece().isWhite() != this.isWhite()){
+                    deReturnat.add(board.getBox(tempX, tempY));
+                }
                 break;
             }
             deReturnat.add(board.getBox(tempX, tempY));
             tempY++;
         }
 
+        if (!hasBeenMoved){
+            if (isWhite()){
+                //partea de sus
+                if (box.getY() == 0){
+                    if(board.getBox(4, 0).getPiece().isKing() && board.getBox(4, 0).getPiece().isWhite()==isWhite()){
+                        King temp = (King) board.getBox(4, 0).getPiece();
+                        if (!temp.hasBeenMoved()){
+                            if (box.getX() == 0 && board.getBox(1, 0).getPiece() == null && board.getBox(2, 0).getPiece() == null && board.getBox(3, 0).getPiece() == null){
+                                deReturnat.add(board.getBox(box.getX()+3, box.getY()));
+                            }
+                            if (box.getX() == 7 && board.getBox(6, 0).getPiece() == null && board.getBox(5, 0).getPiece() == null){
+                                deReturnat.add(board.getBox(box.getX()-2, box.getY()));
+                            }
+                        }
+                    }
+                }
+            }
+            else{
+                //partea de jos
+                if (box.getY() == 7){
+                    if(board.getBox(4, 7).getPiece().isKing() && board.getBox(4, 7).getPiece().isWhite()==isWhite()){
+                        King temp = (King) board.getBox(4, 7).getPiece();
+                        if (!temp.hasBeenMoved()){
+                            if (box.getX() == 0 && board.getBox(1, 7).getPiece() == null && board.getBox(2, 7).getPiece() == null && board.getBox(3, 7).getPiece() == null){
+                                deReturnat.add(board.getBox(box.getX()+3, box.getY()));
+                            }
+                            if (box.getX() == 7 && board.getBox(6, 7).getPiece() == null && board.getBox(5, 7).getPiece() == null){
+                                deReturnat.add(board.getBox(box.getX()-2, box.getY()));
+                            }
+                        }
+                    }
+                }
+            }
+        }
         return deReturnat;
+    }
+
+    public boolean hasBeenMoved() {
+        return hasBeenMoved;
+    }
+    public void setHasBeenMoved(boolean hasBeenMoved) {
+        this.hasBeenMoved = hasBeenMoved;
     }
 }
