@@ -77,6 +77,8 @@ public class DrawPanel extends JPanel implements MouseListener {
                         graphics.setColor(Color.LIGHT_GRAY);
                     graphics.drawRect(pressedX,pressedY,70,70);
                 }
+                isMoved=false;
+                isPressed = false;
             }
         }
     }
