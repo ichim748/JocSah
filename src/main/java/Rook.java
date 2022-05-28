@@ -43,7 +43,7 @@ public class Rook extends Piece{
 
         for (int i = 0; i < 8; i++){
             for (int j = 0; j < 8; j++){
-                if (board.getBoard()[i][j].getPiece().isKing() && board.getBoard()[i][j].getPiece().isWhite() == this.isWhite()){
+                if (board.getBoard()[i][j].getPiece() != null && board.getBoard()[i][j].getPiece().isKing() && board.getBoard()[i][j].getPiece().isWhite() == this.isWhite()){
                     regeleMeu = board.getBox(i, j);
                     break;
                 }
@@ -74,52 +74,52 @@ public class Rook extends Piece{
         int tempY = box.getY();
         tempX--;
         while (tempX >= 0){
-            if (board.getBox(tempX, tempY).getPiece() != null){
-                if (board.getBox(tempX, tempY).getPiece().isWhite() != this.isWhite()){
-                    deReturnat.add(board.getBox(tempX, tempY));
+            if (board.getBox(tempY, tempX).getPiece() != null){
+                if (board.getBox(tempY, tempX).getPiece().isWhite() != this.isWhite()){
+                    deReturnat.add(board.getBox(tempY, tempX));
                 }
                 break;
             }
-            deReturnat.add(board.getBox(tempX, tempY));
+            deReturnat.add(board.getBox(tempY, tempX));
             tempX--;
         }
         tempX = box.getX();
         tempY = box.getY();
         tempY--;
         while (tempY >= 0){
-            if (board.getBox(tempX, tempY).getPiece() != null){
-                if (board.getBox(tempX, tempY).getPiece().isWhite() != this.isWhite()){
-                    deReturnat.add(board.getBox(tempX, tempY));
+            if (board.getBox(tempY, tempX).getPiece() != null){
+                if (board.getBox(tempY, tempX).getPiece().isWhite() != this.isWhite()){
+                    deReturnat.add(board.getBox(tempY, tempX));
                 }
                 break;
             }
-            deReturnat.add(board.getBox(tempX, tempY));
+            deReturnat.add(board.getBox(tempY, tempX));
             tempY--;
         }
         tempX = box.getX();
         tempY = box.getY();
         tempX++;
         while (tempX <= 7){
-            if (board.getBox(tempX, tempY).getPiece() != null){
-                if (board.getBox(tempX, tempY).getPiece().isWhite() != this.isWhite()){
-                    deReturnat.add(board.getBox(tempX, tempY));
+            if (board.getBox(tempY, tempX).getPiece() != null){
+                if (board.getBox(tempY, tempX).getPiece().isWhite() != this.isWhite()){
+                    deReturnat.add(board.getBox(tempY, tempX));
                 }
                 break;
             }
-            deReturnat.add(board.getBox(tempX, tempY));
+            deReturnat.add(board.getBox(tempY, tempX));
             tempX++;
         }
         tempX = box.getX();
         tempY = box.getY();
         tempY++;
         while (tempY <= 7){
-            if (board.getBox(tempX, tempY).getPiece() != null){
-                if (board.getBox(tempX, tempY).getPiece().isWhite() != this.isWhite()){
-                    deReturnat.add(board.getBox(tempX, tempY));
+            if (board.getBox(tempY, tempX).getPiece() != null){
+                if (board.getBox(tempY, tempX).getPiece().isWhite() != this.isWhite()){
+                    deReturnat.add(board.getBox(tempY, tempX));
                 }
                 break;
             }
-            deReturnat.add(board.getBox(tempX, tempY));
+            deReturnat.add(board.getBox(tempY, tempX));
             tempY++;
         }
 
@@ -127,14 +127,14 @@ public class Rook extends Piece{
             if (isWhite()){
                 //partea de sus
                 if (box.getY() == 0){
-                    if(board.getBox(4, 0).getPiece().isKing() && board.getBox(4, 0).getPiece().isWhite()==isWhite()){
-                        King temp = (King) board.getBox(4, 0).getPiece();
+                    if(board.getBox(0, 4).getPiece().isKing() && board.getBox(0, 4).getPiece().isWhite()==isWhite()){
+                        King temp = (King) board.getBox(0, 4).getPiece();
                         if (!temp.hasBeenMoved()){
-                            if (box.getX() == 0 && board.getBox(1, 0).getPiece() == null && board.getBox(2, 0).getPiece() == null && board.getBox(3, 0).getPiece() == null){
-                                deReturnat.add(board.getBox(box.getX()+3, box.getY()));
+                            if (box.getX() == 0 && board.getBox(0, 1).getPiece() == null && board.getBox(0, 2).getPiece() == null && board.getBox(0, 3).getPiece() == null){
+                                deReturnat.add(board.getBox(box.getY(), box.getX()+3));
                             }
-                            if (box.getX() == 7 && board.getBox(6, 0).getPiece() == null && board.getBox(5, 0).getPiece() == null){
-                                deReturnat.add(board.getBox(box.getX()-2, box.getY()));
+                            if (box.getX() == 7 && board.getBox(0, 6).getPiece() == null && board.getBox(0, 5).getPiece() == null){
+                                deReturnat.add(board.getBox(box.getY(), box.getX()-2));
                             }
                         }
                     }
@@ -143,19 +143,24 @@ public class Rook extends Piece{
             else{
                 //partea de jos
                 if (box.getY() == 7){
-                    if(board.getBox(4, 7).getPiece().isKing() && board.getBox(4, 7).getPiece().isWhite()==isWhite()){
-                        King temp = (King) board.getBox(4, 7).getPiece();
+                    if(board.getBox(7, 4).getPiece().isKing() && board.getBox(7, 4).getPiece().isWhite()==isWhite()){
+                        King temp = (King) board.getBox(7, 4).getPiece();
                         if (!temp.hasBeenMoved()){
-                            if (box.getX() == 0 && board.getBox(1, 7).getPiece() == null && board.getBox(2, 7).getPiece() == null && board.getBox(3, 7).getPiece() == null){
-                                deReturnat.add(board.getBox(box.getX()+3, box.getY()));
+                            if (box.getX() == 0 && board.getBox(7, 1).getPiece() == null && board.getBox(7, 2).getPiece() == null && board.getBox(7, 3).getPiece() == null){
+                                deReturnat.add(board.getBox(box.getY(), box.getX()+3));
                             }
-                            if (box.getX() == 7 && board.getBox(6, 7).getPiece() == null && board.getBox(5, 7).getPiece() == null){
-                                deReturnat.add(board.getBox(box.getX()-2, box.getY()));
+                            if (box.getX() == 7 && board.getBox(7, 6).getPiece() == null && board.getBox(7, 5).getPiece() == null){
+                                deReturnat.add(board.getBox(box.getY(), box.getX()-2));
                             }
                         }
                     }
                 }
             }
+        }
+        System.out.println("Possible rook moves: ");
+        for(Square i : deReturnat){
+            System.out.print(i.getX()+" ");
+            System.out.println(i.getY());
         }
         return deReturnat;
     }

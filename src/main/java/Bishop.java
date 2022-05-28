@@ -40,8 +40,8 @@ public class Bishop extends Piece{
 
         for (int i = 0; i < 8; i++){
             for (int j = 0; j < 8; j++){
-                if (board.getBoard()[i][j].getPiece().isKing() && board.getBoard()[i][j].getPiece().isWhite() == this.isWhite()){
-                    regeleMeu = board.getBox(i, j);
+                if (board.getBoard()[i][j].getPiece() != null && board.getBoard()[i][j].getPiece().isKing() && board.getBoard()[i][j].getPiece().isWhite() == this.isWhite()){
+                    regeleMeu = board.getBoard()[i][j];
                     break;
                 }
             }
@@ -73,13 +73,13 @@ public class Bishop extends Piece{
         tempX--;
         tempY--;
         while (tempX >= 0 && tempY >= 0){
-            if (board.getBox(tempX, tempY).getPiece() != null){
-                if (board.getBox(tempX, tempY).getPiece().isWhite() != this.isWhite()){
-                    deReturnat.add(board.getBox(tempX, tempY));
+            if (board.getBox(tempY, tempX).getPiece() != null){
+                if (board.getBox(tempY, tempX).getPiece().isWhite() != this.isWhite()){
+                    deReturnat.add(board.getBox(tempY, tempX));
                 }
                 break;
             }
-            deReturnat.add(board.getBox(tempX, tempY));
+            deReturnat.add(board.getBox(tempY, tempX));
             tempX--;
             tempY--;
         }
@@ -88,13 +88,13 @@ public class Bishop extends Piece{
         tempX++;
         tempY--;
         while (tempY >= 0 && tempX <= 7){
-            if (board.getBox(tempX, tempY).getPiece() != null){
-                if (board.getBox(tempX, tempY).getPiece().isWhite() != this.isWhite()){
-                    deReturnat.add(board.getBox(tempX, tempY));
+            if (board.getBox(tempY, tempX).getPiece() != null){
+                if (board.getBox(tempY, tempX).getPiece().isWhite() != this.isWhite()){
+                    deReturnat.add(board.getBox(tempY, tempX));
                 }
                 break;
             }
-            deReturnat.add(board.getBox(tempX, tempY));
+            deReturnat.add(board.getBox(tempY, tempX));
             tempY--;
             tempX++;
         }
@@ -103,13 +103,13 @@ public class Bishop extends Piece{
         tempX--;
         tempY++;
         while (tempX >= 0 && tempY <= 7){
-            if (board.getBox(tempX, tempY).getPiece() != null){
-                if (board.getBox(tempX, tempY).getPiece().isWhite() != this.isWhite()){
-                    deReturnat.add(board.getBox(tempX, tempY));
+            if (board.getBox(tempY, tempX).getPiece() != null){
+                if (board.getBox(tempY, tempX).getPiece().isWhite() != this.isWhite()){
+                    deReturnat.add(board.getBox(tempY, tempX));
                 }
                 break;
             }
-            deReturnat.add(board.getBox(tempX, tempY));
+            deReturnat.add(board.getBox(tempY, tempX));
             tempX--;
             tempY++;
         }
@@ -118,17 +118,21 @@ public class Bishop extends Piece{
         tempX++;
         tempY++;
         while (tempX <= 7 && tempY <= 7){
-            if (board.getBox(tempX, tempY).getPiece() != null){
-                if (board.getBox(tempX, tempY).getPiece().isWhite() != this.isWhite()){
-                    deReturnat.add(board.getBox(tempX, tempY));
+            if (board.getBox(tempY, tempX).getPiece() != null){
+                if (board.getBox(tempY, tempX).getPiece().isWhite() != this.isWhite()){
+                    deReturnat.add(board.getBox(tempY, tempX));
                 }
                 break;
             }
-            deReturnat.add(board.getBox(tempX, tempY));
+            deReturnat.add(board.getBox(tempY, tempX));
             tempX++;
             tempY++;
         }
-
+        System.out.println("Possible bishop moves: ");
+        for(Square i : deReturnat){
+            System.out.print(i.getX()+" ");
+            System.out.println(i.getY());
+        }
         return deReturnat;
     }
 }

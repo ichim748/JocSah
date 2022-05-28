@@ -74,10 +74,12 @@ public class Pawn extends Piece{
             }
             if (box.getY() >= 1){
                 deReturnat.add(board.getBox(box.getX(), box.getY()-1));
-                if (box.getX() >= 1 && (board.getBox(box.getX()-1, box.getY()-1).getPiece() != null || (board.getBox(box.getX()-1, box.getY()).getPiece()!=null && board.getBox(box.getX()-1, box.getY()).getPiece().getClass().getSimpleName().equals("Pawn") && board.getBox(box.getX()-1, box.getY()).getPiece().isWhite() != this.isWhite() && box.getY() == 4))){
+                if (box.getX() >= 1 && ( (board.getBox(box.getX()-1, box.getY()-1).getPiece() != null && board.getBox(box.getX()-1, box.getY()-1).getPiece().isWhite()!=this.isWhite())
+                                || (board.getBox(box.getX()-1, box.getY()).getPiece()!=null && board.getBox(box.getX()-1, box.getY()).getPiece().getClass().getSimpleName().equals("Pawn")
+                                && board.getBox(box.getX()-1, box.getY()).getPiece().isWhite() != this.isWhite() && box.getY() == 4))){
                     deReturnat.add(board.getBox(box.getX()-1, box.getY()+1));
                 }
-                if (box.getX() <= 6 && (board.getBox(box.getX()+1, box.getY()-1).getPiece() != null || (board.getBox(box.getX()+1, box.getY()).getPiece()!=null && board.getBox(box.getX()+1, box.getY()).getPiece().getClass().getSimpleName().equals("Pawn") && board.getBox(box.getX()+1, box.getY()).getPiece().isWhite() != this.isWhite() && box.getY() == 4))){
+                if (box.getX() <= 6 && ( (board.getBox(box.getX()+1, box.getY()-1).getPiece() != null  &&  board.getBox(box.getX()+1, box.getY()-1).getPiece().isWhite()!=this.isWhite()) || (board.getBox(box.getX()+1, box.getY()).getPiece()!=null && board.getBox(box.getX()+1, box.getY()).getPiece().getClass().getSimpleName().equals("Pawn") && board.getBox(box.getX()+1, box.getY()).getPiece().isWhite() != this.isWhite() && box.getY() == 4))){
                     deReturnat.add(board.getBox(box.getX()+1, box.getY()+1));
                 }
             }
@@ -88,13 +90,18 @@ public class Pawn extends Piece{
             }
             if (box.getY() <= 6){
                 deReturnat.add(board.getBox(box.getX(), box.getY()+1));
-                if (box.getX() >= 1 && (board.getBox(box.getX()-1, box.getY()+1).getPiece() != null || (board.getBox(box.getX()-1, box.getY()).getPiece()!=null && board.getBox(box.getX()-1, box.getY()).getPiece().getClass().getSimpleName().equals("Pawn") && board.getBox(box.getX()-1, box.getY()).getPiece().isWhite() != this.isWhite() && box.getY() == 3))){
+                if (box.getX() >= 1 && ((board.getBox(box.getX()-1, box.getY()+1).getPiece() != null &&  board.getBox(box.getX()-1, box.getY()+1).getPiece().isWhite()!=this.isWhite()) || (board.getBox(box.getX()-1, box.getY()).getPiece()!=null && board.getBox(box.getX()-1, box.getY()).getPiece().getClass().getSimpleName().equals("Pawn") && board.getBox(box.getX()-1, box.getY()).getPiece().isWhite() != this.isWhite() && box.getY() == 3))){
                     deReturnat.add(board.getBox(box.getX()-1, box.getY()+1));
                 }
-                if (box.getX() <= 6 && (board.getBox(box.getX()+1, box.getY()+1).getPiece() != null || (board.getBox(box.getX()+1, box.getY()).getPiece()!=null && board.getBox(box.getX()+1, box.getY()).getPiece().getClass().getSimpleName().equals("Pawn") && board.getBox(box.getX()+1, box.getY()).getPiece().isWhite() != this.isWhite() && box.getY() == 3))){
+                if (box.getX() <= 6 && ((board.getBox(box.getX()+1, box.getY()+1).getPiece() != null  &&  board.getBox(box.getX()+1, box.getY()+1).getPiece().isWhite()!=this.isWhite()) || (board.getBox(box.getX()+1, box.getY()).getPiece()!=null && board.getBox(box.getX()+1, box.getY()).getPiece().getClass().getSimpleName().equals("Pawn") && board.getBox(box.getX()+1, box.getY()).getPiece().isWhite() != this.isWhite() && box.getY() == 3))){
                     deReturnat.add(board.getBox(box.getX()+1, box.getY()+1));
                 }
             }
+        }
+        System.out.println("Possible pawn moves: ");
+        for(Square i : deReturnat){
+            System.out.print(i.getX()+" ");
+            System.out.println(i.getY());
         }
         return deReturnat;
     }
