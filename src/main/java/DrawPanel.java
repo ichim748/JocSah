@@ -70,7 +70,7 @@ public class DrawPanel extends JPanel implements MouseListener {
                 }
             }
             else{
-                if(board.getBoard()[pressedY][pressedX].getPiece().validMove(board,board.getBox(pressedY,pressedX),board.getBox(destY,destX))){
+                if(board.getBoard()[pressedY][pressedX].getPiece().validMove(board,board.getBox(pressedY,pressedX),board.getBox(destY,destX)) && board.getBox(pressedY,pressedX).getPiece().possibleMoves(board,board.getBox(pressedY,pressedX)).contains(board.getBox(destY,destX))){
                     System.out.println("mesaj");
                     board.getBoard()[destY][destX].setPiece(board.getBoard()[pressedY][pressedX].getPiece());
                     board.getBoard()[pressedY][pressedX].setPiece(null);
@@ -81,7 +81,8 @@ public class DrawPanel extends JPanel implements MouseListener {
                         graphics.setColor(Color.LIGHT_GRAY);
                     graphics.drawRect(pressedX,pressedY,70,70);
                 }
-                isMoved=false;
+                System.out.println("ajung");
+                isMoved = false;
                 isPressed = false;
             }
         }
@@ -99,12 +100,14 @@ public class DrawPanel extends JPanel implements MouseListener {
             int y = (me.getY() - 20) / 70;
             if(board.getBoard()[y][x].getPiece()!=null){
                 if(board.getBoard()[y][x].getPiece().isWhite()==board.getBoard()[pressedY][pressedX].getPiece().isWhite()){
+                    System.out.println("pas1");
                     isMoved=false;
                     pressedX=x;
                     pressedY=y;
                     repaint();
                 }
                 else{
+                    System.out.println("pas2");
                     isMoved = true;
                     destX = x;
                     destY = y;
@@ -112,6 +115,7 @@ public class DrawPanel extends JPanel implements MouseListener {
                 }
             }
             else{
+                System.out.println("pas3");
                 isMoved = true;
                 destX = x;
                 destY = y;
