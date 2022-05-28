@@ -39,7 +39,7 @@ public class Pawn extends Piece{
 
         for (int i = 0; i < 8; i++){
             for (int j = 0; j < 8; j++){
-                if (board.getBoard()[i][j].getPiece().isKing() && board.getBoard()[i][j].getPiece().isWhite() == this.isWhite()){
+                if (board.getBoard()[i][j].getPiece()!=null && board.getBoard()[i][j].getPiece().isKing() && board.getBoard()[i][j].getPiece().isWhite() == this.isWhite()){
                     regeleMeu = board.getBox(i, j);
                     break;
                 }
@@ -74,10 +74,10 @@ public class Pawn extends Piece{
             }
             if (box.getY() >= 1){
                 deReturnat.add(board.getBox(box.getX(), box.getY()-1));
-                if (box.getX() >= 1 && (board.getBox(box.getX()-1, box.getY()-1).getPiece() != null || (board.getBox(box.getX()-1, box.getY()).getPiece().getClass().getSimpleName().equals("Pawn") && board.getBox(box.getX()-1, box.getY()).getPiece().isWhite() != this.isWhite() && box.getY() == 4))){
+                if (box.getX() >= 1 && (board.getBox(box.getX()-1, box.getY()-1).getPiece() != null || (board.getBox(box.getX()-1, box.getY()).getPiece()!=null && board.getBox(box.getX()-1, box.getY()).getPiece().getClass().getSimpleName().equals("Pawn") && board.getBox(box.getX()-1, box.getY()).getPiece().isWhite() != this.isWhite() && box.getY() == 4))){
                     deReturnat.add(board.getBox(box.getX()-1, box.getY()+1));
                 }
-                if (box.getX() <= 6 && (board.getBox(box.getX()+1, box.getY()-1).getPiece() != null || (board.getBox(box.getX()+1, box.getY()).getPiece().getClass().getSimpleName().equals("Pawn") && board.getBox(box.getX()+1, box.getY()).getPiece().isWhite() != this.isWhite() && box.getY() == 4))){
+                if (box.getX() <= 6 && (board.getBox(box.getX()+1, box.getY()-1).getPiece() != null || (board.getBox(box.getX()+1, box.getY()).getPiece()!=null && board.getBox(box.getX()+1, box.getY()).getPiece().getClass().getSimpleName().equals("Pawn") && board.getBox(box.getX()+1, box.getY()).getPiece().isWhite() != this.isWhite() && box.getY() == 4))){
                     deReturnat.add(board.getBox(box.getX()+1, box.getY()+1));
                 }
             }
@@ -88,10 +88,10 @@ public class Pawn extends Piece{
             }
             if (box.getY() <= 6){
                 deReturnat.add(board.getBox(box.getX(), box.getY()+1));
-                if (box.getX() >= 1 && (board.getBox(box.getX()-1, box.getY()+1).getPiece() != null || (board.getBox(box.getX()-1, box.getY()).getPiece().getClass().getSimpleName().equals("Pawn") && board.getBox(box.getX()-1, box.getY()).getPiece().isWhite() != this.isWhite() && box.getY() == 3))){
+                if (box.getX() >= 1 && (board.getBox(box.getX()-1, box.getY()+1).getPiece() != null || (board.getBox(box.getX()-1, box.getY()).getPiece()!=null && board.getBox(box.getX()-1, box.getY()).getPiece().getClass().getSimpleName().equals("Pawn") && board.getBox(box.getX()-1, box.getY()).getPiece().isWhite() != this.isWhite() && box.getY() == 3))){
                     deReturnat.add(board.getBox(box.getX()-1, box.getY()+1));
                 }
-                if (box.getX() <= 6 && (board.getBox(box.getX()+1, box.getY()+1).getPiece() != null || (board.getBox(box.getX()+1, box.getY()).getPiece().getClass().getSimpleName().equals("Pawn") && board.getBox(box.getX()+1, box.getY()).getPiece().isWhite() != this.isWhite() && box.getY() == 3))){
+                if (box.getX() <= 6 && (board.getBox(box.getX()+1, box.getY()+1).getPiece() != null || (board.getBox(box.getX()+1, box.getY()).getPiece()!=null && board.getBox(box.getX()+1, box.getY()).getPiece().getClass().getSimpleName().equals("Pawn") && board.getBox(box.getX()+1, box.getY()).getPiece().isWhite() != this.isWhite() && box.getY() == 3))){
                     deReturnat.add(board.getBox(box.getX()+1, box.getY()+1));
                 }
             }

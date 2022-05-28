@@ -60,6 +60,9 @@ public class DrawPanel extends JPanel implements MouseListener {
                     graphics.setColor(Color.yellow);
                     graphics.fillRect(20+70*pressedX,20+70*pressedY,70,70);
                     graphics.drawImage(board.getBoard()[pressedY][pressedX].getPiece().getShape(),20+70*pressedX,20+70*pressedY,this);
+                    for(Square square : board.getBoard()[pressedY][pressedX].getPiece().possibleMoves(board,board.getBox(pressedY,pressedX))){
+                        graphics.fillRect(20+70*square.getY(),20+70*square.getX(),70,70);
+                    }
                 }
                 else
                 {
@@ -67,7 +70,8 @@ public class DrawPanel extends JPanel implements MouseListener {
                 }
             }
             else{
-                if(board.getBoard()[pressedY][pressedX].getPiece().validMove(board,new Square(pressedY,pressedX,board.getBoard()[pressedY][pressedX].getPiece()),new Square(destY,destX,board.getBoard()[destY][destX].getPiece()))){
+                if(board.getBoard()[pressedY][pressedX].getPiece().validMove(board,board.getBox(pressedY,pressedX),board.getBox(destY,destX))){
+                    System.out.println("mesaj");
                     board.getBoard()[destY][destX].setPiece(board.getBoard()[pressedY][pressedX].getPiece());
                     board.getBoard()[pressedY][pressedX].setPiece(null);
                     graphics.drawImage(board.getBoard()[destY][destX].getPiece().getShape(),destX,destY,this);
