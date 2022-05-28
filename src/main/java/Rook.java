@@ -1,3 +1,8 @@
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -7,6 +12,19 @@ public class Rook extends Piece{
 
     public Rook(boolean white){
         super(white);
+        Image shape;
+        try {
+            BufferedImage image = ImageIO.read(new File("ChessPieces.png"));
+            if(white){
+                shape = image.getSubimage(800,0,200,200).getScaledInstance(70,70,BufferedImage.SCALE_SMOOTH);
+            }
+            else {
+                shape = image.getSubimage(800,200,200,200).getScaledInstance(70,70,BufferedImage.SCALE_SMOOTH);
+            }
+            super.setShape(shape);
+        } catch (IOException e){
+            System.out.println("Error");
+        }
     }
 
     @Override

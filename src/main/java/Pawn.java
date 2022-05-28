@@ -1,10 +1,27 @@
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Pawn extends Piece{
-
     public Pawn(boolean white){
         super(white, false);
+        Image shape;
+        try {
+            BufferedImage image = ImageIO.read(new File("ChessPieces.png"));
+            if(white){
+                shape = image.getSubimage(1000,0,200,200).getScaledInstance(70,70,BufferedImage.SCALE_SMOOTH);
+            }
+            else {
+                shape = image.getSubimage(1000,200,200,200).getScaledInstance(70,70,BufferedImage.SCALE_SMOOTH);
+            }
+            super.setShape(shape);
+        } catch (IOException e){
+            System.out.println("Error");
+        }
     }
 
     @Override
@@ -81,4 +98,5 @@ public class Pawn extends Piece{
         }
         return deReturnat;
     }
+
 }

@@ -4,6 +4,7 @@ public class Board {
     Square[][] board;
 
     public Board(){
+        board = new Square[8][8];
         this.resetBoard();
     }
 

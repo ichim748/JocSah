@@ -1,11 +1,10 @@
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class Main {
 
-    public static void main (String[] args) throws SQLException {
-        PLSQL bd = new PLSQL();
-        //bd.insertUser("Gigel", "Ceva");
-        //System.out.println(bd.updateStatusJucator("Gigel",1));
-        bd.updatePoints("Marcel","Gigel");
+    public static void main (String[] args) throws SQLException, IOException {
+        Board board = new Board();
+        DrawBoard drawBoard = new DrawBoard(board);
     }
 }

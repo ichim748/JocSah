@@ -1,3 +1,8 @@
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -5,6 +10,19 @@ public class Knight extends Piece{
 
     public Knight(boolean white){
         super(white, false);
+        Image shape;
+        try {
+            BufferedImage image = ImageIO.read(new File("ChessPieces.png"));
+            if(white){
+                shape = image.getSubimage(600,0,200,200).getScaledInstance(70,70,BufferedImage.SCALE_SMOOTH);
+            }
+            else {
+                shape = image.getSubimage(600,200,200,200).getScaledInstance(70,70,BufferedImage.SCALE_SMOOTH);
+            }
+            super.setShape(shape);
+        } catch (IOException e){
+            System.out.println("Error");
+        }
     }
 
     @Override

@@ -1,3 +1,8 @@
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -5,9 +10,21 @@ public class King extends Piece{
     private boolean isCastled = false;
     private boolean hasBeenMoved = false;
 
-    public King(boolean white)
-    {
+    public King(boolean white) {
         super(white, true);
+        Image shape;
+        try {
+            BufferedImage image = ImageIO.read(new File("ChessPieces.png"));
+            if(white){
+                shape = image.getSubimage(0,0,200,200).getScaledInstance(70,70,BufferedImage.SCALE_SMOOTH);
+            }
+            else {
+                shape = image.getSubimage(0,200,200,200).getScaledInstance(70,70,BufferedImage.SCALE_SMOOTH);
+            }
+            super.setShape(shape);
+        } catch (IOException e){
+            System.out.println("Error");
+        }
     }
 
     public boolean isCastled() {
