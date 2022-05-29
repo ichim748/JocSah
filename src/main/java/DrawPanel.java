@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
@@ -8,6 +9,7 @@ public class DrawPanel extends JPanel implements MouseListener {
     private Board board;
     private boolean isPressed;
     private boolean isMoved;
+    private boolean choose;
     private int pressedX;
     private int pressedY;
     private int destX;
@@ -16,6 +18,7 @@ public class DrawPanel extends JPanel implements MouseListener {
         this.board=board;
         this.isPressed=false;
         this.isMoved=false;
+        this.choose=true;
         this.pressedX=0;
         this.pressedY=0;
         addMouseListener(this);
@@ -56,7 +59,7 @@ public class DrawPanel extends JPanel implements MouseListener {
         }
         if(isPressed){
             if(!isMoved){
-                if(board.getBoard()[pressedY][pressedX].getPiece()!=null){
+                if(board.getBoard()[pressedY][pressedX].getPiece()!=null && board.getBoard()[pressedY][pressedX].getPiece().isWhite()==this.choose){
                     graphics.setColor(Color.yellow);
                     graphics.fillRect(20+70*pressedX,20+70*pressedY,70,70);
                     graphics.drawImage(board.getBoard()[pressedY][pressedX].getPiece().getShape(),20+70*pressedX,20+70*pressedY,this);
@@ -80,6 +83,7 @@ public class DrawPanel extends JPanel implements MouseListener {
                     else
                         graphics.setColor(Color.LIGHT_GRAY);
                     graphics.drawRect(pressedX,pressedY,70,70);
+                    choose=!choose;
                 }
                 System.out.println("ajung");
                 isMoved = false;
@@ -99,38 +103,66 @@ public class DrawPanel extends JPanel implements MouseListener {
             }
             System.out.println();
         }
-        if(!isPressed) {
-            isPressed = true;
-            pressedX = (me.getX() - 20) / 70;
-            pressedY = (me.getY() - 20) / 70;
-            repaint();
-        }
-        else {
-            int x = (me.getX() - 20) / 70;
-            int y = (me.getY() - 20) / 70;
-            if(board.getBoard()[y][x].getPiece()!=null){
-                if(board.getBoard()[y][x].getPiece().isWhite()==board.getBoard()[pressedY][pressedX].getPiece().isWhite()){
-                    System.out.println("pas1");
-                    isMoved=false;
-                    pressedX=x;
-                    pressedY=y;
-                    repaint();
+        if(me.getX()>20 && me.getY()>20 && me.getX()<580 && me.getY()<580){
+            if(!isPressed) {
+                isPressed = true;
+                pressedX = (me.getX() - 20) / 70;
+                pressedY = (me.getY() - 20) / 70;
+                repaint();
+            }
+            else {
+                int x = (me.getX() - 20) / 70;
+                int y = (me.getY() - 20) / 70;
+                if(board.getBoard()[y][x].getPiece()!=null){
+                    if(board.getBoard()[y][x].getPiece().isWhite()==board.getBoard()[pressedY][pressedX].getPiece().isWhite()){
+                        System.out.println("pas1");
+                        isMoved=false;
+                        pressedX=x;
+                        pressedY=y;
+                        repaint();
+                    }
+                    else{
+                        System.out.println("pas2");
+                        isMoved = true;
+                        destX = x;
+                        destY = y;
+                        repaint();
+                        Robot robot = null;
+                        try {
+                            robot = new Robot();
+                        } catch (Exception e){
+                            System.out.println("error");
+                        }
+                        int mask = InputEvent.BUTTON1_DOWN_MASK;
+                        robot.mouseMove(21,300);
+                        robot.mousePress(mask);
+                        robot.mouseRelease(mask);
+                        robot.mouseMove(me.getX(), me.getY());
+                    }
                 }
                 else{
-                    System.out.println("pas2");
+                    System.out.println("pas3");
                     isMoved = true;
                     destX = x;
                     destY = y;
                     repaint();
+                    Robot robot = null;
+                    try {
+                        robot = new Robot();
+                    } catch (Exception e){
+                        System.out.println("error");
+                    }
+                    int mask = InputEvent.BUTTON1_DOWN_MASK;
+                    robot.mouseMove(21,300);
+                    robot.mousePress(mask);
+                    robot.mouseRelease(mask);
+                    robot.mouseMove(me.getX(), me.getY());
                 }
             }
-            else{
-                System.out.println("pas3");
-                isMoved = true;
-                destX = x;
-                destY = y;
-                repaint();
-            }
+        }
+        else{
+            isPressed=false;
+            repaint();
         }
     }
     @Override

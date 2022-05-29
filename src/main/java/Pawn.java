@@ -73,7 +73,7 @@ public class Pawn extends Piece{
         System.out.println(tempX + " " + tempY);
         if(this.isWhite()){
             if(tempY==6){
-                if(board.getBox(tempY-2,tempX).getPiece()==null)
+                if(board.getBox(tempY-2,tempX).getPiece()==null && board.getBox(tempY-1,tempX).getPiece()==null)
                     deReturnat.add(board.getBox(tempY-2,tempX));
             }
             if(tempY>=1){
@@ -90,7 +90,7 @@ public class Pawn extends Piece{
         }
         else{
             if(tempY==1){
-                if(board.getBox(tempY+2,tempX).getPiece()==null)
+                if(board.getBox(tempY+2,tempX).getPiece()==null && board.getBox(tempY+1,tempX).getPiece()==null)
                     deReturnat.add(board.getBox(tempY+2,tempX));
             }
             if(tempY<=6){
