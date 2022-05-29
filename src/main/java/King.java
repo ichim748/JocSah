@@ -36,7 +36,7 @@ public class King extends Piece{
 
     @Override
     public boolean validMove(Board board, Square start, Square end) throws Exception {
-        if (start.getPiece().isWhite() == end.getPiece().isWhite()){
+        if (start.getPiece() != null && end.getPiece() != null && start.getPiece().isWhite() == end.getPiece().isWhite()){
             return false;
         }
         for (int i = 0; i < 8; i++){
@@ -55,35 +55,35 @@ public class King extends Piece{
     @Override
     public List<Square> possibleMoves(Board board, Square start) throws Exception {
         List<Square> deReturnat = new ArrayList<>();
-        if (start.getX() >= 1 && start.getY() >= 1)
-            deReturnat.add(board.getBox(start.getX() - 1, start.getY() - 1));
-        if (start.getX() >= 1)
-            deReturnat.add(board.getBox(start.getX() - 1, start.getY()));
-        if (start.getX() >= 1 && start.getY() <= 6)
-            deReturnat.add(board.getBox(start.getX() - 1, start.getY() + 1));
-        if (start.getY() >= 1)
-            deReturnat.add(board.getBox(start.getX(), start.getY() - 1));
-        if (start.getY() <= 6)
-            deReturnat.add(board.getBox(start.getX(), start.getY() + 1));
-        if (start.getX() <= 6 && start.getY() >= 1)
-            deReturnat.add(board.getBox(start.getX() + 1, start.getY() - 1));
-        if (start.getX() <= 6)
-            deReturnat.add(board.getBox(start.getX() + 1, start.getY()));
-        if (start.getX() <= 6 && start.getY() <= 6)
-            deReturnat.add(board.getBox(start.getX() + 1, start.getY() + 1));
+        if (start.getX() >= 1 && start.getY() >= 1 && (board.getBox(start.getY() - 1, start.getX() - 1).getPiece() == null || (board.getBox(start.getY() - 1, start.getX() - 1).getPiece() != null && board.getBox(start.getY() - 1, start.getX() - 1).getPiece().isWhite()!=this.isWhite())))
+            deReturnat.add(board.getBox(start.getY() - 1, start.getX() - 1));
+        if (start.getX() >= 1 && (board.getBox(start.getY(), start.getX() - 1).getPiece() == null || (board.getBox(start.getY(), start.getX() - 1).getPiece() != null && board.getBox(start.getY(), start.getX() - 1).getPiece().isWhite()!=this.isWhite())))
+            deReturnat.add(board.getBox(start.getY(), start.getX() - 1));
+        if (start.getX() >= 1 && start.getY() <= 6 && (board.getBox(start.getY() + 1, start.getX() - 1).getPiece() == null || (board.getBox(start.getY() + 1, start.getX() - 1).getPiece() != null && board.getBox(start.getY() + 1, start.getX() - 1).getPiece().isWhite()!=this.isWhite())))
+            deReturnat.add(board.getBox(start.getY() + 1, start.getX() - 1));
+        if (start.getY() >= 1 && (board.getBox(start.getY() - 1, start.getX()).getPiece() == null || (board.getBox(start.getY() - 1, start.getX()).getPiece() != null && board.getBox(start.getY() - 1, start.getX()).getPiece().isWhite()!=this.isWhite())))
+            deReturnat.add(board.getBox(start.getY() - 1, start.getX()));
+        if (start.getY() <= 6  && (board.getBox(start.getY() + 1, start.getX()).getPiece() == null || (board.getBox(start.getY() + 1, start.getX()).getPiece() != null && board.getBox(start.getY() + 1, start.getX()).getPiece().isWhite()!=this.isWhite())))
+            deReturnat.add(board.getBox(start.getY() + 1, start.getX()));
+        if (start.getX() <= 6 && start.getY() >= 1 && (board.getBox(start.getY() - 1, start.getX() + 1).getPiece() == null || (board.getBox(start.getY() - 1, start.getX() + 1).getPiece() != null && board.getBox(start.getY() - 1, start.getX() + 1).getPiece().isWhite()!=this.isWhite())))
+            deReturnat.add(board.getBox(start.getY() - 1, start.getX() + 1));
+        if (start.getX() <= 6  && (board.getBox(start.getY(), start.getX() + 1).getPiece() == null || (board.getBox(start.getY(), start.getX() + 1).getPiece() != null && board.getBox(start.getY(), start.getX() + 1).getPiece().isWhite()!=this.isWhite())))
+            deReturnat.add(board.getBox(start.getY(), start.getX() + 1));
+        if (start.getX() <= 6 && start.getY() <= 6  && (board.getBox(start.getY() + 1, start.getX() + 1).getPiece() == null || (board.getBox(start.getY() + 1, start.getX() + 1).getPiece() != null && board.getBox(start.getY() + 1, start.getX() + 1).getPiece().isWhite()!=this.isWhite())))
+            deReturnat.add(board.getBox(start.getY() + 1, start.getX() + 1));
         if (!this.hasBeenMoved){
             //daca e regele alb
             if (this.isWhite()){
-                if (board.getBox(0,7).getPiece().getClass().getSimpleName().equals("Rook") && board.getBox(0, 7).getPiece().isWhite()==this.isWhite()){
-                    Rook temp = (Rook) board.getBox(0,7).getPiece();
-                    if (!temp.hasBeenMoved() && board.getBox(1,7).getPiece() == null && board.getBox(2,7).getPiece() == null && board.getBox(3,7).getPiece() == null){
-                        deReturnat.add(board.getBox(start.getX()-3, start.getY()));
+                if (board.getBox(7,0).getPiece().getClass().getSimpleName().equals("Rook") && board.getBox(7, 0).getPiece().isWhite()==this.isWhite()){
+                    Rook temp = (Rook) board.getBox(7,0).getPiece();
+                    if (!temp.hasBeenMoved() && board.getBox(7,1).getPiece() == null && board.getBox(7,2).getPiece() == null && board.getBox(7,3).getPiece() == null){
+                        deReturnat.add(board.getBox(start.getY(), start.getX()-3));
                     }
                 }
                 if (board.getBox(7,7).getPiece().getClass().getSimpleName().equals("Rook") && board.getBox(7, 7).getPiece().isWhite()==this.isWhite()){
                     Rook temp = (Rook) board.getBox(7,7).getPiece();
-                    if (!temp.hasBeenMoved() && board.getBox(6,7).getPiece() == null && board.getBox(5,7).getPiece() == null){
-                        deReturnat.add(board.getBox(start.getX()+2, start.getY()));
+                    if (!temp.hasBeenMoved() && board.getBox(7,6).getPiece() == null && board.getBox(7,5).getPiece() == null){
+                        deReturnat.add(board.getBox(start.getY(), start.getX()+2));
                     }
                 }
             }
@@ -91,14 +91,14 @@ public class King extends Piece{
             else{
                 if (board.getBox(0,0).getPiece().getClass().getSimpleName().equals("Rook") && board.getBox(0, 0).getPiece().isWhite()==this.isWhite()){
                     Rook temp = (Rook) board.getBox(0,0).getPiece();
-                    if (!temp.hasBeenMoved() && board.getBox(1,0).getPiece() == null && board.getBox(2,0).getPiece() == null && board.getBox(3,0).getPiece() == null){
-                        deReturnat.add(board.getBox(start.getX()-3, start.getY()));
+                    if (!temp.hasBeenMoved() && board.getBox(0,1).getPiece() == null && board.getBox(0,2).getPiece() == null && board.getBox(0,3).getPiece() == null){
+                        deReturnat.add(board.getBox(start.getY(), start.getX()-3));
                     }
                 }
-                if (board.getBox(7,0).getPiece().getClass().getSimpleName().equals("Rook") && board.getBox(7, 0).getPiece().isWhite()==this.isWhite()){
-                    Rook temp = (Rook) board.getBox(7,0).getPiece();
-                    if (!temp.hasBeenMoved() && board.getBox(6,0).getPiece() == null && board.getBox(5,0).getPiece() == null){
-                        deReturnat.add(board.getBox(start.getX()+2, start.getY()));
+                if (board.getBox(0,7).getPiece().getClass().getSimpleName().equals("Rook") && board.getBox(0, 7).getPiece().isWhite()==this.isWhite()){
+                    Rook temp = (Rook) board.getBox(0,7).getPiece();
+                    if (!temp.hasBeenMoved() && board.getBox(0,6).getPiece() == null && board.getBox(0,5).getPiece() == null){
+                        deReturnat.add(board.getBox(start.getY(), start.getX()+2));
                     }
                 }
             }
