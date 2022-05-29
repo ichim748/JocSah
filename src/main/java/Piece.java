@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Piece {
@@ -56,8 +57,14 @@ public abstract class Piece {
             for (int j = 0; j < 8; j++){
                 if (board.getBoard()[i][j].getPiece() != null && board.getBoard()[i][j].getPiece().isWhite() != this.isWhite()){
                     for (Square t : board.getBoard()[i][j].getPiece().possibleMoves(board, board.getBox(i, j))){
-                        if (t.equals(regeleMeu))
+                        if (t.equals(regeleMeu)) {
+                            start.setPiece(end.getPiece());
+                            end.setPiece(null);
+                            if (temp != null){
+                                end.setPiece(temp);
+                            }
                             return false;
+                        }
                     }
                 }
             }

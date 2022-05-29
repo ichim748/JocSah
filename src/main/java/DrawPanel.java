@@ -64,7 +64,8 @@ public class DrawPanel extends JPanel implements MouseListener {
                     graphics.fillRect(20+70*pressedX,20+70*pressedY,70,70);
                     graphics.drawImage(board.getBoard()[pressedY][pressedX].getPiece().getShape(),20+70*pressedX,20+70*pressedY,this);
                     for(Square square : board.getBoard()[pressedY][pressedX].getPiece().possibleMoves(board,board.getBoard()[pressedY][pressedX])){
-                        graphics.fillRect(20+70*square.getX(),20+70*square.getY(),70,70);
+                        if (board.getBoard()[pressedY][pressedX].getPiece().validMove(board, board.getBox(pressedY, pressedX), square))
+                            graphics.fillRect(20+70*square.getX(),20+70*square.getY(),70,70);
                     }
                 }
                 else

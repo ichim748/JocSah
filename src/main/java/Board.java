@@ -79,8 +79,9 @@ public class Board {
         System.out.println("Mutari rege alb: ");
         System.out.println(listaPosibile.toString());
         System.out.println(listaValide.toString());
-        if (listaValide.isEmpty() && !listaPosibile.isEmpty())
+        if (listaValide.isEmpty() && !listaPosibile.isEmpty()) {
             return 2;
+        }
         List<Square> listaPosibile1 = new ArrayList<>();
         List<Square> listaValide1 = new ArrayList<>();
         listaPosibile1 = regeleNegru.getPiece().possibleMoves(this, regeleNegru);
