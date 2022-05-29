@@ -68,33 +68,40 @@ public class Pawn extends Piece{
     public List<Square> possibleMoves(Board board, Square box) throws Exception {
         List<Square> deReturnat = new ArrayList<>();
         //Daca e pe casuta de start => poate merge 2 casute
-        if (this.isWhite()){
-            if (box.getY() == 6){
-                deReturnat.add(board.getBox(box.getX(), box.getY()-2));
+        int tempX = box.getX();
+        int tempY = box.getY();
+        System.out.println(tempX + " " + tempY);
+        if(this.isWhite()){
+            if(tempY==6){
+                if(board.getBox(tempY-2,tempX).getPiece()==null)
+                    deReturnat.add(board.getBox(tempY-2,tempX));
             }
-            if (box.getY() >= 1){
-                deReturnat.add(board.getBox(box.getX(), box.getY()-1));
-                if (box.getX() >= 1 && ( (board.getBox(box.getX()-1, box.getY()-1).getPiece() != null && board.getBox(box.getX()-1, box.getY()-1).getPiece().isWhite()!=this.isWhite())
-                                || (board.getBox(box.getX()-1, box.getY()).getPiece()!=null && board.getBox(box.getX()-1, box.getY()).getPiece().getClass().getSimpleName().equals("Pawn")
-                                && board.getBox(box.getX()-1, box.getY()).getPiece().isWhite() != this.isWhite() && box.getY() == 4))){
-                    deReturnat.add(board.getBox(box.getX()-1, box.getY()+1));
+            if(tempY>=1){
+                if(board.getBox(tempY-1,tempX).getPiece()==null){
+                    deReturnat.add(board.getBox(tempY-1,tempX));
                 }
-                if (box.getX() <= 6 && ( (board.getBox(box.getX()+1, box.getY()-1).getPiece() != null  &&  board.getBox(box.getX()+1, box.getY()-1).getPiece().isWhite()!=this.isWhite()) || (board.getBox(box.getX()+1, box.getY()).getPiece()!=null && board.getBox(box.getX()+1, box.getY()).getPiece().getClass().getSimpleName().equals("Pawn") && board.getBox(box.getX()+1, box.getY()).getPiece().isWhite() != this.isWhite() && box.getY() == 4))){
-                    deReturnat.add(board.getBox(box.getX()+1, box.getY()+1));
+                if(tempX!=0 && board.getBox(tempY-1,tempX-1).getPiece()!=null && board.getBox(tempY-1,tempX-1).getPiece().isWhite()!=this.isWhite()){
+                    deReturnat.add(board.getBox(tempY-1,tempX-1));
+                }
+                if(tempX!=7 && board.getBox(tempY-1,tempX+1).getPiece()!=null && board.getBox(tempY-1,tempX+1).getPiece().isWhite()!=this.isWhite()){
+                    deReturnat.add(board.getBox(tempY-1,tempX+1));
                 }
             }
         }
         else{
-            if (box.getY() == 1){
-                deReturnat.add(board.getBox(box.getX(), box.getY()+2));
+            if(tempY==1){
+                if(board.getBox(tempY+2,tempX).getPiece()==null)
+                    deReturnat.add(board.getBox(tempY+2,tempX));
             }
-            if (box.getY() <= 6){
-                deReturnat.add(board.getBox(box.getX(), box.getY()+1));
-                if (box.getX() >= 1 && ((board.getBox(box.getX()-1, box.getY()+1).getPiece() != null &&  board.getBox(box.getX()-1, box.getY()+1).getPiece().isWhite()!=this.isWhite()) || (board.getBox(box.getX()-1, box.getY()).getPiece()!=null && board.getBox(box.getX()-1, box.getY()).getPiece().getClass().getSimpleName().equals("Pawn") && board.getBox(box.getX()-1, box.getY()).getPiece().isWhite() != this.isWhite() && box.getY() == 3))){
-                    deReturnat.add(board.getBox(box.getX()-1, box.getY()+1));
+            if(tempY<=6){
+                if(board.getBox(tempY+1,tempX).getPiece()==null){
+                    deReturnat.add(board.getBox(tempY+1,tempX));
                 }
-                if (box.getX() <= 6 && ((board.getBox(box.getX()+1, box.getY()+1).getPiece() != null  &&  board.getBox(box.getX()+1, box.getY()+1).getPiece().isWhite()!=this.isWhite()) || (board.getBox(box.getX()+1, box.getY()).getPiece()!=null && board.getBox(box.getX()+1, box.getY()).getPiece().getClass().getSimpleName().equals("Pawn") && board.getBox(box.getX()+1, box.getY()).getPiece().isWhite() != this.isWhite() && box.getY() == 3))){
-                    deReturnat.add(board.getBox(box.getX()+1, box.getY()+1));
+                if(tempX!=0 && board.getBox(tempY+1,tempX-1).getPiece()!=null && board.getBox(tempY+1,tempX-1).getPiece().isWhite()!=this.isWhite()){
+                    deReturnat.add(board.getBox(tempY+1,tempX-1));
+                }
+                if(tempX!=7 && board.getBox(tempY+1,tempX+1).getPiece()!=null && board.getBox(tempY+1,tempX+1).getPiece().isWhite()!=this.isWhite()){
+                    deReturnat.add(board.getBox(tempY+1,tempX+1));
                 }
             }
         }

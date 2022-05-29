@@ -40,7 +40,7 @@ public class Knight extends Piece{
 
         for (int i = 0; i < 8; i++){
             for (int j = 0; j < 8; j++){
-                if (board.getBoard()[i][j].getPiece().isKing() && board.getBoard()[i][j].getPiece().isWhite() == this.isWhite()){
+                if (board.getBoard()[i][j].getPiece()!=null && board.getBoard()[i][j].getPiece().isKing() && board.getBoard()[i][j].getPiece().isWhite() == this.isWhite()){
                     regeleMeu = board.getBox(i, j);
                     break;
                 }
@@ -68,36 +68,101 @@ public class Knight extends Piece{
     @Override
     public List<Square> possibleMoves(Board board, Square box) throws Exception {
         List<Square> deReturnat = new ArrayList<>();
-        if (box.getY() >= 2){
-            if (box.getX() >= 1 && (board.getBox(box.getX() - 1, box.getY()-2).getPiece() == null || board.getBox(box.getX() - 1, box.getY()-2).getPiece().isWhite()!= this.isWhite())){
-                deReturnat.add(board.getBox(box.getX() - 1, box.getY()-2));
+        int tempX = box.getX();
+        int tempY = box.getY();
+        System.out.println(tempX +" "+ tempY);
+        if(tempY>=2){
+            if(tempX>=2){
+                if(board.getBox(tempY-1,tempX-2).getPiece()==null || board.getBox(tempY-1,tempX-2).getPiece().isWhite()!=this.isWhite()){
+                    deReturnat.add(board.getBox(tempY-1,tempX-2));
+                }
+                if(board.getBox(tempY-2,tempX-1).getPiece()==null || board.getBox(tempY-2,tempX-1).getPiece().isWhite()!=this.isWhite()){
+                    deReturnat.add(board.getBox(tempY-2,tempX-1));
+                }
             }
-            if (box.getX() <= 6 && (board.getBox(box.getX() + 1, box.getY()-2).getPiece() == null || board.getBox(box.getX() + 1, box.getY()-2).getPiece().isWhite()!= this.isWhite())){
-                deReturnat.add(board.getBox(box.getX() + 1, box.getY()-2));
+            else {
+                if(tempX==1){
+                    if(board.getBox(tempY-2,tempX-1).getPiece()==null || board.getBox(tempY-2,tempX-1).getPiece().isWhite()!=this.isWhite()){
+                        deReturnat.add(board.getBox(tempY-2,tempX-1));
+                    }
+                }
+            }
+            if(tempX<=5){
+                if(board.getBox(tempY-1,tempX+2).getPiece()==null || board.getBox(tempY-1,tempX+2).getPiece().isWhite()!=this.isWhite()){
+                    deReturnat.add(board.getBox(tempY-1,tempX+2));
+                }
+                if(board.getBox(tempY-2,tempX+1).getPiece()==null || board.getBox(tempY-2,tempX+1).getPiece().isWhite()!=this.isWhite()){
+                    deReturnat.add(board.getBox(tempY-2,tempX+1));
+                }
+            }
+            else{
+                if(tempX==6){
+                    if(board.getBox(tempY-2,tempX+1).getPiece()==null || board.getBox(tempY-2,tempX+1).getPiece().isWhite()!=this.isWhite()){
+                        deReturnat.add(board.getBox(tempY-2,tempX+1));
+                    }
+                }
             }
         }
-        if (box.getY() >= 1){
-            if (box.getX() >= 2 && (board.getBox(box.getX() - 2, box.getY()-1).getPiece() == null || board.getBox(box.getX() - 2, box.getY()-1).getPiece().isWhite()!= this.isWhite())){
-                deReturnat.add(board.getBox(box.getX() - 2, box.getY()-1));
-            }
-            if (box.getX() <= 5 && (board.getBox(box.getX() + 1, box.getY()-1).getPiece() == null || board.getBox(box.getX() + 2, box.getY()-1).getPiece().isWhite()!= this.isWhite())){
-                deReturnat.add(board.getBox(box.getX() + 2, box.getY()-1));
+        else{
+            if(tempY==1){
+                if(tempX>=2){
+                    if(board.getBox(tempY-1,tempX-2).getPiece()==null || board.getBox(tempY-1,tempX-2).getPiece().isWhite()!=this.isWhite()){
+                        deReturnat.add(board.getBox(tempY-1,tempX-2));
+                    }
+                }
+                if(tempX<=5){
+                    System.out.println("ceva");
+                    if(board.getBox(tempY-1,tempX+2).getPiece()==null || board.getBox(tempY-1,tempX+2).getPiece().isWhite()!=this.isWhite()){
+                        deReturnat.add(board.getBox(tempY-1,tempX+2));
+                        System.out.println("altceva");
+                    }
+                }
             }
         }
-        if (box.getY() <= 5){
-            if (box.getX() >= 1 && (board.getBox(box.getX() - 1, box.getY()+2).getPiece() == null || board.getBox(box.getX() - 1, box.getY()+2).getPiece().isWhite()!= this.isWhite())){
-                deReturnat.add(board.getBox(box.getX() - 1, box.getY()+2));
+        if(tempY<=5){
+            if(tempX>=2){
+                if(board.getBox(tempY+1,tempX-2).getPiece()==null || board.getBox(tempY+1,tempX-2).getPiece().isWhite()!=this.isWhite()){
+                    deReturnat.add(board.getBox(tempY+1,tempX-2));
+                }
+                if(board.getBox(tempY+2,tempX-1).getPiece()==null || board.getBox(tempY+2,tempX-1).getPiece().isWhite()!=this.isWhite()){
+                    deReturnat.add(board.getBox(tempY+2,tempX-1));
+                }
             }
-            if (box.getX() <= 6 && (board.getBox(box.getX() + 1, box.getY()+2).getPiece() == null || board.getBox(box.getX() + 1, box.getY()+2).getPiece().isWhite()!= this.isWhite())){
-                deReturnat.add(board.getBox(box.getX() + 1, box.getY()+2));
+            else {
+                if(tempX==1){
+                    if(board.getBox(tempY+2,tempX-1).getPiece()==null || board.getBox(tempY+2,tempX-1).getPiece().isWhite()!=this.isWhite()){
+                        deReturnat.add(board.getBox(tempY+2,tempX-1));
+                    }
+                }
+            }
+            if(tempX<=5){
+                if(board.getBox(tempY+1,tempX+2).getPiece()==null || board.getBox(tempY+1,tempX+2).getPiece().isWhite()!=this.isWhite()){
+                    deReturnat.add(board.getBox(tempY+1,tempX+2));
+                }
+                if(board.getBox(tempY+2,tempX+1).getPiece()==null || board.getBox(tempY+2,tempX+1).getPiece().isWhite()!=this.isWhite()){
+                    deReturnat.add(board.getBox(tempY+2,tempX+1));
+                }
+            }
+            else{
+                if(tempX==6){
+                    if(board.getBox(tempY+2,tempX+1).getPiece()==null || board.getBox(tempY+2,tempX+1).getPiece().isWhite()!=this.isWhite()){
+                        deReturnat.add(board.getBox(tempY+2,tempX+1));
+                    }
+                }
             }
         }
-        if (box.getY() <= 6){
-            if (box.getX() >= 2 && (board.getBox(box.getX() - 2, box.getY()+1).getPiece() == null || board.getBox(box.getX() - 2, box.getY()+1).getPiece().isWhite()!= this.isWhite())){
-                deReturnat.add(board.getBox(box.getX() - 2, box.getY()+1));
-            }
-            if (box.getX() <= 5 && (board.getBox(box.getX() + 2, box.getY()+1).getPiece() == null || board.getBox(box.getX() +2, box.getY() + 1).getPiece().isWhite()!= this.isWhite())){
-                deReturnat.add(board.getBox(box.getX() + 2, box.getY()+1));
+        else{
+            if(tempY==6){
+                if(tempX>=2){
+                    if(board.getBox(tempY+1,tempX-2).getPiece()==null || board.getBox(tempY+1,tempX-2).getPiece().isWhite()!=this.isWhite()){
+                        deReturnat.add(board.getBox(tempY+1,tempX-2));
+                    }
+                }
+                if(tempX<=5){
+                    if(board.getBox(tempY+1,tempX+2).getPiece()==null || board.getBox(tempY+1,tempX+2).getPiece().isWhite()!=this.isWhite()){
+                        deReturnat.add(board.getBox(tempY+1,tempX+2));
+                    }
+                }
             }
         }
         return deReturnat;
