@@ -79,8 +79,22 @@ public class Board {
         System.out.println("Mutari rege alb: ");
         System.out.println(listaPosibile.toString());
         System.out.println(listaValide.toString());
+        boolean exists = false;
         if (listaValide.isEmpty() && !listaPosibile.isEmpty()) {
-            return 2;
+            for (int i = 0; i < 8; i++){
+                for (int j = 0; j < 8; j++){
+                    if (this.board[i][j].getPiece()!=null && this.board[i][j].getPiece().isWhite()){
+                        for(Square t : this.board[i][j].getPiece().possibleMoves(this, board[i][j])){
+                            if (board[i][j].getPiece().validMove(this, board[i][j], t)){
+                                exists = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            if (!exists)
+                return 2;
         }
         List<Square> listaPosibile1 = new ArrayList<>();
         List<Square> listaValide1 = new ArrayList<>();
@@ -95,8 +109,22 @@ public class Board {
         System.out.println("Mutari rege negru: ");
         System.out.println(listaPosibile1.toString());
         System.out.println(listaValide1.toString());
-        if (listaValide1.isEmpty() && !listaPosibile1.isEmpty())
-            return 1;
+        if (listaValide1.isEmpty() && !listaPosibile1.isEmpty()) {
+            for (int i = 0; i < 8; i++){
+                for (int j = 0; j < 8; j++){
+                    if (this.board[i][j].getPiece()!=null && !this.board[i][j].getPiece().isWhite()){
+                        for(Square t : this.board[i][j].getPiece().possibleMoves(this, board[i][j])){
+                            if (board[i][j].getPiece().validMove(this, board[i][j], t)){
+                                exists = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            if (!exists)
+                return 1;
+        }
         return 0;
     }
     public Square[][] getBoard(){

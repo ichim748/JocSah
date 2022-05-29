@@ -34,7 +34,7 @@ public class King extends Piece{
         isCastled = castled;
     }
 
-    @Override
+    /*@Override
     public boolean validMove(Board board, Square start, Square end) throws Exception {
         if (start.getPiece() != null && end.getPiece() != null && start.getPiece().isWhite() == end.getPiece().isWhite()){
             return false;
@@ -50,7 +50,7 @@ public class King extends Piece{
             }
         }
         return true;
-    }
+    }*/
 
     @Override
     public List<Square> possibleMoves(Board board, Square start) throws Exception {
