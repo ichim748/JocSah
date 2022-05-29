@@ -1,8 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.InputEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.io.IOException;
 
 public class DrawPanel extends JPanel implements MouseListener {
@@ -14,13 +12,57 @@ public class DrawPanel extends JPanel implements MouseListener {
     private int pressedY;
     private int destX;
     private int destY;
-    public DrawPanel(Board board) throws IOException {
+    private JDialog jd;
+    private Square pawnToGetPromoted;
+    public DrawPanel(Board board, JDialog jd) throws IOException {
         this.board=board;
         this.isPressed=false;
         this.isMoved=false;
         this.choose=true;
         this.pressedX=0;
         this.pressedY=0;
+        this.jd=jd;
+        JButton queen = new JButton("Queen");
+        JButton rook = new JButton("Rook");
+        JButton bishop = new JButton("Bishop");
+        JButton knight = new JButton("Knight");
+        queen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                board.getBoard()[pawnToGetPromoted.getY()][pawnToGetPromoted.getX()].setPiece(new Queen(pawnToGetPromoted.getPiece().isWhite()));
+                repaint();
+                jd.setVisible(false);
+            }
+        });
+        rook.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                board.getBoard()[pawnToGetPromoted.getY()][pawnToGetPromoted.getX()].setPiece(new Rook(pawnToGetPromoted.getPiece().isWhite()));
+                repaint();
+                jd.setVisible(false);
+            }
+        });
+        bishop.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                board.getBoard()[pawnToGetPromoted.getY()][pawnToGetPromoted.getX()].setPiece(new Bishop(pawnToGetPromoted.getPiece().isWhite()));
+                repaint();
+                jd.setVisible(false);
+            }
+        });
+        knight.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                board.getBoard()[pawnToGetPromoted.getY()][pawnToGetPromoted.getX()].setPiece(new Knight(pawnToGetPromoted.getPiece().isWhite()));
+                repaint();
+                jd.setVisible(false);
+            }
+        });
+        jd.add(queen);
+        jd.add(bishop);
+        jd.add(rook);
+        jd.add(knight);
+        jd.setVisible(false);
         addMouseListener(this);
     }
     @Override
@@ -95,10 +137,26 @@ public class DrawPanel extends JPanel implements MouseListener {
                 else if (board.isGameEnded() == 2){
                     System.out.println("Negru a castigat!");
                 }
+                else if(promotion()){
+                    jd.setVisible(true);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+    }
+    private boolean promotion() throws Exception {
+        for(int i=0;i<8;i++)
+            if(board.getBox(0,i).getPiece()!=null && board.getBox(0,i).getPiece().getClass().getSimpleName().equals("Pawn")){
+                pawnToGetPromoted = board.getBox(0,i);
+                return true;
+            }
+        for(int i=0;i<8;i++)
+            if(board.getBox(7,i).getPiece()!=null && board.getBox(7,i).getPiece().getClass().getSimpleName().equals("Pawn")){
+                pawnToGetPromoted = board.getBox(7,i);
+                return true;
+            }
+        return false;
     }
     @Override
     public void mousePressed(MouseEvent me){
