@@ -27,4 +27,13 @@ public class Square {
     public void setY(Integer y) {
         this.y = y;
     }
+
+    @Override
+    public String toString() {
+        return "Square{" +
+                "x=" + x +
+                ", y=" + y +
+                ", piece=" + piece +
+                '}';
+    }
 }

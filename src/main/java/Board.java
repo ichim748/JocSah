@@ -1,4 +1,6 @@
 import javax.xml.crypto.dsig.keyinfo.KeyName;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Board {
     Square[][] board;
@@ -45,6 +47,56 @@ public class Board {
                 board[i][j] = new Square(j, i, null);
             }
         }
+    }
+    // 0 - nu e terminat
+    // 1 - alb a castigat
+    // 2 - negru a castigat
+    public Integer isGameEnded() throws Exception {
+        Square regeleAlb = null;
+        Square regeleNegru = null;
+        for (int i = 0; i < 8; i++){
+            for (int j = 0; j < 8; j++){
+                if (this.board[i][j].getPiece() != null && this.board[i][j].getPiece().isKing() && this.board[i][j].getPiece().isWhite()){
+                    regeleAlb = this.board[i][j];
+                }
+                if (this.board[i][j].getPiece() != null && this.board[i][j].getPiece().isKing() && !this.board[i][j].getPiece().isWhite()){
+                    regeleNegru = this.board[i][j];
+                }
+                if (regeleAlb!=null && regeleNegru!=null)
+                    break;
+            }
+        }
+        List<Square> listaPosibile = new ArrayList<>();
+        List<Square> listaValide = new ArrayList<>();
+        listaPosibile = regeleAlb.getPiece().possibleMoves(this, regeleAlb);
+        if (!listaPosibile.isEmpty()){
+            for(Square i : listaPosibile){
+                if (regeleAlb.getPiece().validMove(this, regeleAlb, i)){
+                    listaValide.add(i);
+                }
+            }
+        }
+        System.out.println("Mutari rege alb: ");
+        System.out.println(listaPosibile.toString());
+        System.out.println(listaValide.toString());
+        if (listaValide.isEmpty() && !listaPosibile.isEmpty())
+            return 2;
+        List<Square> listaPosibile1 = new ArrayList<>();
+        List<Square> listaValide1 = new ArrayList<>();
+        listaPosibile1 = regeleNegru.getPiece().possibleMoves(this, regeleNegru);
+        if (!listaPosibile1.isEmpty()){
+            for(Square i : listaPosibile1){
+                if (regeleNegru.getPiece().validMove(this, regeleNegru, i)){
+                    listaValide1.add(i);
+                }
+            }
+        }
+        System.out.println("Mutari rege negru: ");
+        System.out.println(listaPosibile1.toString());
+        System.out.println(listaValide1.toString());
+        if (listaValide1.isEmpty() && !listaPosibile1.isEmpty())
+            return 1;
+        return 0;
     }
     public Square[][] getBoard(){
         return this.board;

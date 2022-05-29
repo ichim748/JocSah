@@ -74,7 +74,6 @@ public class DrawPanel extends JPanel implements MouseListener {
             }
             else{
                 if(board.getBoard()[pressedY][pressedX].getPiece().validMove(board,board.getBox(pressedY,pressedX),board.getBox(destY,destX)) && board.getBox(pressedY,pressedX).getPiece().possibleMoves(board,board.getBox(pressedY,pressedX)).contains(board.getBox(destY,destX))){
-                    System.out.println("mesaj");
                     board.getBoard()[destY][destX].setPiece(board.getBoard()[pressedY][pressedX].getPiece());
                     board.getBoard()[pressedY][pressedX].setPiece(null);
                     graphics.drawImage(board.getBoard()[destY][destX].getPiece().getShape(),destX,destY,this);
@@ -85,24 +84,23 @@ public class DrawPanel extends JPanel implements MouseListener {
                     graphics.drawRect(pressedX,pressedY,70,70);
                     choose=!choose;
                 }
-                System.out.println("ajung");
                 isMoved = false;
                 isPressed = false;
+            }
+            try {
+                if (board.isGameEnded() == 1){
+                    System.out.println("Alb a castigat!");
+                }
+                else if (board.isGameEnded() == 2){
+                    System.out.println("Negru a castigat!");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
     @Override
     public void mousePressed(MouseEvent me){
-        for(int i = 0; i<=7; i++){
-            for (int j = 0; j<=7; j++){
-                if (board.getBoard()[i][j].getPiece()!=null)
-                    System.out.print(board.getBoard()[i][j].getPiece().getClass().getSimpleName().toString()+" ");
-                else{
-                    System.out.print("- ");
-                }
-            }
-            System.out.println();
-        }
         if(me.getX()>20 && me.getY()>20 && me.getX()<580 && me.getY()<580){
             if(!isPressed) {
                 isPressed = true;
@@ -115,14 +113,12 @@ public class DrawPanel extends JPanel implements MouseListener {
                 int y = (me.getY() - 20) / 70;
                 if(board.getBoard()[y][x].getPiece()!=null){
                     if(board.getBoard()[y][x].getPiece().isWhite()==board.getBoard()[pressedY][pressedX].getPiece().isWhite()){
-                        System.out.println("pas1");
                         isMoved=false;
                         pressedX=x;
                         pressedY=y;
                         repaint();
                     }
                     else{
-                        System.out.println("pas2");
                         isMoved = true;
                         destX = x;
                         destY = y;
@@ -141,7 +137,6 @@ public class DrawPanel extends JPanel implements MouseListener {
                     }
                 }
                 else{
-                    System.out.println("pas3");
                     isMoved = true;
                     destX = x;
                     destY = y;
