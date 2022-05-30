@@ -125,29 +125,31 @@ public class DrawPanel extends JPanel implements MouseListener {
                     else
                         graphics.setColor(Color.LIGHT_GRAY);
                     graphics.drawRect(pressedX,pressedY,70,70);
-                    //pls help
-                    if(destX == 2 && pressedX == destX + 1 && board.getBoard()[destY][destX].getPiece()!=null && board.getBoard()[destY][destX].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[destY-1][destX].getPiece()!=null && board.getBoard()[destY-1][destX].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[destY-1][destX].getPiece().isWhite()!=board.getBoard()[destY][destX].getPiece().isWhite()){
-                        if((destX+destY+1)%2==0)
-                            graphics.setColor(Color.white);
-                        else
-                            graphics.setColor(Color.LIGHT_GRAY);
+                    if(destY == 2 && pressedX == destX + 1 && board.getBoard()[destY][destX].getPiece()!=null && board.getBoard()[destY][destX].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[destY+1][destX].getPiece()!=null && board.getBoard()[destY+1][destX].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[destY+1][destX].getPiece().isWhite()!=board.getBoard()[destY][destX].getPiece().isWhite()){
                         board.getBoard()[destY+1][destX].setPiece(null);
-                        graphics.drawRect(destX,destY+1,70,70);
-                        isMoved = false;
-                        isPressed = false;
-                        repaint();
                     }
-                    if(destX == 2 && pressedX == destX + 1 && board.getBoard()[destY][destX].getPiece()!=null && board.getBoard()[destY][destX].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[destY+1][destX].getPiece()!=null && board.getBoard()[destY+1][destX].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[destY+1][destX].getPiece().isWhite()!=board.getBoard()[destY][destX].getPiece().isWhite()){
-                        if((destX+destY+1)%2==0)
-                            graphics.setColor(Color.white);
-                        else
-                            graphics.setColor(Color.LIGHT_GRAY);
+                    if(destY == 2 && pressedX == destX - 1 && board.getBoard()[destY][destX].getPiece()!=null && board.getBoard()[destY][destX].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[destY+1][destX].getPiece()!=null && board.getBoard()[destY+1][destX].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[destY+1][destX].getPiece().isWhite()!=board.getBoard()[destY][destX].getPiece().isWhite()){
                         board.getBoard()[destY+1][destX].setPiece(null);
-                        graphics.drawRect(destX,destY+1,70,70);
-                        isMoved = false;
-                        isPressed = false;
-                        repaint();
                     }
+                    if(board.getBoard()[destY][destX].getPiece().getClass().getSimpleName().equals("Rook")){
+                        ((Rook) board.getBoard()[destY][destX].getPiece()).setHasBeenMoved(true);
+                    }
+                    if(board.getBoard()[destY][destX].getPiece().isKing()){
+                        if(destY==pressedY){
+                            if(destX==pressedX+2){
+                                board.getBoard()[destY][destX-1].setPiece(new Rook(board.getBoard()[destY][destX].getPiece().isWhite()));
+                                ((Rook) board.getBoard()[destY][destX-1].getPiece()).setHasBeenMoved(true);
+                                board.getBoard()[destY][7].setPiece(null);
+                            }
+                            if(destX==pressedX-2){
+                                board.getBoard()[destY][destX+1].setPiece(new Rook(board.getBoard()[destY][destX].getPiece().isWhite()));
+                                ((Rook) board.getBoard()[destY][destX+1].getPiece()).setHasBeenMoved(true);
+                                board.getBoard()[destY][0].setPiece(null);
+                            }
+                        }
+                        ((King)board.getBoard()[destY][destX].getPiece()).setHasBeenMoved(true);
+                    }
+
                     choose=!choose;
                 }
                 isMoved = false;

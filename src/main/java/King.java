@@ -77,7 +77,7 @@ public class King extends Piece{
                 if (board.getBox(7, 0).getPiece()!=null && board.getBox(7,0).getPiece().getClass().getSimpleName().equals("Rook") && board.getBox(7, 0).getPiece().isWhite()==this.isWhite()){
                     Rook temp = (Rook) board.getBox(7,0).getPiece();
                     if (!temp.hasBeenMoved() && board.getBox(7,1).getPiece() == null && board.getBox(7,2).getPiece() == null && board.getBox(7,3).getPiece() == null){
-                        deReturnat.add(board.getBox(start.getY(), start.getX()-3));
+                        deReturnat.add(board.getBox(start.getY(), start.getX()-2));
                     }
                 }
                 if (board.getBox(7, 7).getPiece()!=null && board.getBox(7,7).getPiece().getClass().getSimpleName().equals("Rook") && board.getBox(7, 7).getPiece().isWhite()==this.isWhite()){
@@ -92,7 +92,7 @@ public class King extends Piece{
                 if (board.getBox(0, 0).getPiece()!=null && board.getBox(0,0).getPiece().getClass().getSimpleName().equals("Rook") && board.getBox(0, 0).getPiece().isWhite()==this.isWhite()){
                     Rook temp = (Rook) board.getBox(0,0).getPiece();
                     if (!temp.hasBeenMoved() && board.getBox(0,1).getPiece() == null && board.getBox(0,2).getPiece() == null && board.getBox(0,3).getPiece() == null){
-                        deReturnat.add(board.getBox(start.getY(), start.getX()-3));
+                        deReturnat.add(board.getBox(start.getY(), start.getX()-2));
                     }
                 }
                 if (board.getBox(0, 7).getPiece()!=null &&board.getBox(0,7).getPiece().getClass().getSimpleName().equals("Rook") && board.getBox(0, 7).getPiece().isWhite()==this.isWhite()){
