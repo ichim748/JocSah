@@ -7,6 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Pawn extends Piece{
+    private boolean movedTwoSpaces = false;
+
+    public boolean isMovedTwoSpaces() {
+        return movedTwoSpaces;
+    }
+    public void setMovedTwoSpaces(boolean movedTwoSpaces) {
+        this.movedTwoSpaces = movedTwoSpaces;
+    }
+
     public Pawn(boolean white){
         super(white, false);
         Image shape;
@@ -46,6 +55,16 @@ public class Pawn extends Piece{
                 if(tempX!=7 && board.getBox(tempY-1,tempX+1).getPiece()!=null && board.getBox(tempY-1,tempX+1).getPiece().isWhite()!=this.isWhite()){
                     deReturnat.add(board.getBox(tempY-1,tempX+1));
                 }
+                if(tempY==3 && tempX<=6 && board.getBox(tempY,tempX+1).getPiece()!=null && board.getBox(tempY,tempX+1).getPiece().isWhite()!=this.isWhite() && board.getBox(tempY,tempX+1).getPiece().getClass().getSimpleName().equals("Pawn")){
+                    Pawn temp = (Pawn) board.getBox(tempY,tempX+1).getPiece();
+                    if (temp.isMovedTwoSpaces())
+                        deReturnat.add(board.getBox(tempY-1,tempX+1));
+                }
+                if(tempY==3 && tempX>=1 && board.getBox(tempY,tempX-1).getPiece()!=null && board.getBox(tempY,tempX-1).getPiece().isWhite()!=this.isWhite() && board.getBox(tempY,tempX-1).getPiece().getClass().getSimpleName().equals("Pawn")){
+                    Pawn temp = (Pawn) board.getBox(tempY,tempX-1).getPiece();
+                    if (temp.isMovedTwoSpaces())
+                        deReturnat.add(board.getBox(tempY-1,tempX-1));
+                }
             }
         }
         else{
@@ -62,6 +81,16 @@ public class Pawn extends Piece{
                 }
                 if(tempX!=7 && board.getBox(tempY+1,tempX+1).getPiece()!=null && board.getBox(tempY+1,tempX+1).getPiece().isWhite()!=this.isWhite()){
                     deReturnat.add(board.getBox(tempY+1,tempX+1));
+                }
+                if(tempY==4 && tempX<=6 && board.getBox(tempY,tempX+1).getPiece()!=null && board.getBox(tempY,tempX+1).getPiece().isWhite()!=this.isWhite() && board.getBox(tempY,tempX+1).getPiece().getClass().getSimpleName().equals("Pawn")){
+                    Pawn temp = (Pawn) board.getBox(tempY,tempX+1).getPiece();
+                    if (temp.isMovedTwoSpaces())
+                        deReturnat.add(board.getBox(tempY+1,tempX+1));
+                }
+                if(tempY==4 && tempX>=1 && board.getBox(tempY,tempX-1).getPiece()!=null && board.getBox(tempY,tempX-1).getPiece().isWhite()!=this.isWhite() && board.getBox(tempY,tempX-1).getPiece().getClass().getSimpleName().equals("Pawn")){
+                    Pawn temp = (Pawn) board.getBox(tempY,tempX-1).getPiece();
+                    if (temp.isMovedTwoSpaces())
+                        deReturnat.add(board.getBox(tempY+1,tempX-1));
                 }
             }
         }

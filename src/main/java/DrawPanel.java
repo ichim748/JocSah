@@ -125,6 +125,23 @@ public class DrawPanel extends JPanel implements MouseListener {
                     else
                         graphics.setColor(Color.LIGHT_GRAY);
                     graphics.drawRect(pressedX,pressedY,70,70);
+                    //pls help
+                    if(destX == 2 && pressedX == destX - 1 && board.getBoard()[destY][destX].getPiece()!=null && board.getBoard()[destY][destX].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[destY-1][destX].getPiece()!=null && board.getBoard()[destY-1][destX].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[destY-1][destX].getPiece().isWhite()!=board.getBoard()[destY][destX].getPiece().isWhite()){
+                        if((destX+destY-1)%2==0)
+                            graphics.setColor(Color.white);
+                        else
+                            graphics.setColor(Color.LIGHT_GRAY);
+                        board.getBoard()[destY-1][destX].setPiece(null);
+                        graphics.drawRect(destX,destY-1,70,70);
+                    }
+                    if(destX == 2 && pressedX == destX + 1 && board.getBoard()[destY][destX].getPiece()!=null && board.getBoard()[destY][destX].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[destY+1][destX].getPiece()!=null && board.getBoard()[destY+1][destX].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[destY+1][destX].getPiece().isWhite()!=board.getBoard()[destY][destX].getPiece().isWhite()){
+                        if((destX+destY-1)%2==0)
+                            graphics.setColor(Color.white);
+                        else
+                            graphics.setColor(Color.LIGHT_GRAY);
+                        board.getBoard()[destY-1][destX].setPiece(null);
+                        graphics.drawRect(destX,destY-1,70,70);
+                    }
                     choose=!choose;
                 }
                 isMoved = false;
@@ -139,6 +156,14 @@ public class DrawPanel extends JPanel implements MouseListener {
                 }
                 else if(promotion()){
                     jd.setVisible(true);
+                }
+                else if(pressedX == destX && destY == pressedY + 2 && destY == 3 && board.getBoard()[destY][destX].getPiece()!=null && board.getBoard()[destY][destX].getPiece().getClass().getSimpleName().equals("Pawn")){
+                    Pawn temp = (Pawn) board.getBoard()[destY][destX].getPiece();
+                    temp.setMovedTwoSpaces(true);
+                }
+                else if(pressedX == destX && destY == pressedY - 2 && destY == 4 && board.getBoard()[destY][destX].getPiece()!=null && board.getBoard()[destY][destX].getPiece().getClass().getSimpleName().equals("Pawn")){
+                    Pawn temp = (Pawn) board.getBoard()[destY][destX].getPiece();
+                    temp.setMovedTwoSpaces(true);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
