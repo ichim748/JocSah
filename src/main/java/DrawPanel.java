@@ -126,21 +126,27 @@ public class DrawPanel extends JPanel implements MouseListener {
                         graphics.setColor(Color.LIGHT_GRAY);
                     graphics.drawRect(pressedX,pressedY,70,70);
                     //pls help
-                    if(destX == 2 && pressedX == destX - 1 && board.getBoard()[destY][destX].getPiece()!=null && board.getBoard()[destY][destX].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[destY-1][destX].getPiece()!=null && board.getBoard()[destY-1][destX].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[destY-1][destX].getPiece().isWhite()!=board.getBoard()[destY][destX].getPiece().isWhite()){
-                        if((destX+destY-1)%2==0)
+                    if(destX == 2 && pressedX == destX + 1 && board.getBoard()[destY][destX].getPiece()!=null && board.getBoard()[destY][destX].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[destY-1][destX].getPiece()!=null && board.getBoard()[destY-1][destX].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[destY-1][destX].getPiece().isWhite()!=board.getBoard()[destY][destX].getPiece().isWhite()){
+                        if((destX+destY+1)%2==0)
                             graphics.setColor(Color.white);
                         else
                             graphics.setColor(Color.LIGHT_GRAY);
-                        board.getBoard()[destY-1][destX].setPiece(null);
-                        graphics.drawRect(destX,destY-1,70,70);
+                        board.getBoard()[destY+1][destX].setPiece(null);
+                        graphics.drawRect(destX,destY+1,70,70);
+                        isMoved = false;
+                        isPressed = false;
+                        repaint();
                     }
                     if(destX == 2 && pressedX == destX + 1 && board.getBoard()[destY][destX].getPiece()!=null && board.getBoard()[destY][destX].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[destY+1][destX].getPiece()!=null && board.getBoard()[destY+1][destX].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[destY+1][destX].getPiece().isWhite()!=board.getBoard()[destY][destX].getPiece().isWhite()){
-                        if((destX+destY-1)%2==0)
+                        if((destX+destY+1)%2==0)
                             graphics.setColor(Color.white);
                         else
                             graphics.setColor(Color.LIGHT_GRAY);
-                        board.getBoard()[destY-1][destX].setPiece(null);
-                        graphics.drawRect(destX,destY-1,70,70);
+                        board.getBoard()[destY+1][destX].setPiece(null);
+                        graphics.drawRect(destX,destY+1,70,70);
+                        isMoved = false;
+                        isPressed = false;
+                        repaint();
                     }
                     choose=!choose;
                 }
