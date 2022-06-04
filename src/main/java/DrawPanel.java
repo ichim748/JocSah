@@ -125,11 +125,21 @@ public class DrawPanel extends JPanel implements MouseListener {
                     else
                         graphics.setColor(Color.LIGHT_GRAY);
                     graphics.drawRect(pressedX,pressedY,70,70);
-                    if(destY == 2 && pressedX == destX + 1 && board.getBoard()[destY][destX].getPiece()!=null && board.getBoard()[destY][destX].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[destY+1][destX].getPiece()!=null && board.getBoard()[destY+1][destX].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[destY+1][destX].getPiece().isWhite()!=board.getBoard()[destY][destX].getPiece().isWhite()){
-                        board.getBoard()[destY+1][destX].setPiece(null);
+                    if(board.getBoard()[destY][destX].getPiece()!=null && board.getBoard()[destY][destX].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[destY+1][destX].getPiece()!=null && board.getBoard()[destY+1][destX].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[destY+1][destX].getPiece().isWhite()!=board.getBoard()[destY][destX].getPiece().isWhite()){
+                        if(destY == 2 && pressedX == destX + 1){
+                            board.getBoard()[destY+1][destX].setPiece(null);
+                        }
+                        if(destY == 2 && pressedX == destX - 1){
+                            board.getBoard()[destY+1][destX].setPiece(null);
+                        }
                     }
-                    if(destY == 2 && pressedX == destX - 1 && board.getBoard()[destY][destX].getPiece()!=null && board.getBoard()[destY][destX].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[destY+1][destX].getPiece()!=null && board.getBoard()[destY+1][destX].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[destY+1][destX].getPiece().isWhite()!=board.getBoard()[destY][destX].getPiece().isWhite()){
-                        board.getBoard()[destY+1][destX].setPiece(null);
+                    if(board.getBoard()[destY][destX].getPiece()!=null && board.getBoard()[destY][destX].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[destY-1][destX].getPiece()!=null && board.getBoard()[destY-1][destX].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[destY-1][destX].getPiece().isWhite()!=board.getBoard()[destY][destX].getPiece().isWhite()){
+                        if(destY == 5 && pressedX == destX + 1){
+                            board.getBoard()[destY-1][destX].setPiece(null);
+                        }
+                        if(destY == 5 && pressedX == destX - 1){
+                            board.getBoard()[destY-1][destX].setPiece(null);
+                        }
                     }
                     if(board.getBoard()[destY][destX].getPiece().getClass().getSimpleName().equals("Rook")){
                         ((Rook) board.getBoard()[destY][destX].getPiece()).setHasBeenMoved(true);
@@ -222,10 +232,11 @@ public class DrawPanel extends JPanel implements MouseListener {
                             System.out.println("error");
                         }
                         int mask = InputEvent.BUTTON1_DOWN_MASK;
-                        robot.mouseMove(21,300);
+                        Point mouseOnScreen = MouseInfo.getPointerInfo().getLocation();
+                        robot.mouseMove((int)mouseOnScreen.getX(),(int)mouseOnScreen.getY());
                         robot.mousePress(mask);
                         robot.mouseRelease(mask);
-                        robot.mouseMove(me.getX(), me.getY());
+                        robot.mouseMove((int)mouseOnScreen.getX(),(int)mouseOnScreen.getY());
                     }
                 }
                 else{
@@ -240,10 +251,11 @@ public class DrawPanel extends JPanel implements MouseListener {
                         System.out.println("error");
                     }
                     int mask = InputEvent.BUTTON1_DOWN_MASK;
-                    robot.mouseMove(21,300);
+                    Point mouseOnScreen = MouseInfo.getPointerInfo().getLocation();
+                    robot.mouseMove((int)mouseOnScreen.getX(),(int)mouseOnScreen.getY());
                     robot.mousePress(mask);
                     robot.mouseRelease(mask);
-                    robot.mouseMove(me.getX(), me.getY());
+                    robot.mouseMove((int)mouseOnScreen.getX(),(int)mouseOnScreen.getY());
                 }
             }
         }
