@@ -150,7 +150,7 @@ public class ComputerPlayer extends Player {
                         j.setPiece(i.getPiece());
                         i.setPiece(null);
 
-                        int score = mini(depth - 1);
+                        int score = maxi(depth - 1);
                         if (score < minim)
                             minim = score;
 
