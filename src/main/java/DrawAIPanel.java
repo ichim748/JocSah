@@ -162,7 +162,7 @@ public class DrawAIPanel extends JPanel implements MouseListener {
                     //Aici trebuie clasa pentru AI
                     //choose=!choose;
                     ComputerPlayer AI = new ComputerPlayer(!choose, board);
-                    AI.maxi(5);
+                    AI.maxi(3);
                     repaint();
                 }
                 isMoved = false;
@@ -177,6 +177,9 @@ public class DrawAIPanel extends JPanel implements MouseListener {
                 }
                 else if(promotion()){
                     jd.setVisible(true);
+                    ComputerPlayer AI = new ComputerPlayer(!choose, board);
+                    AI.maxi(3);
+                    repaint();
                 }
                 else if(pressedX == destX && destY == pressedY + 2 && destY == 3 && board.getBoard()[destY][destX].getPiece()!=null && board.getBoard()[destY][destX].getPiece().getClass().getSimpleName().equals("Pawn")){
                     Pawn temp = (Pawn) board.getBoard()[destY][destX].getPiece();
@@ -217,7 +220,7 @@ public class DrawAIPanel extends JPanel implements MouseListener {
                 int x = (me.getX() - 20) / 70;
                 int y = (me.getY() - 20) / 70;
                 if(board.getBoard()[y][x].getPiece()!=null){
-                    if(board.getBoard()[y][x].getPiece().isWhite()==board.getBoard()[pressedY][pressedX].getPiece().isWhite()){
+                    if(board.getBoard()[y][x].getPiece()!=null && board.getBoard()[pressedY][pressedX].getPiece()!=null && board.getBoard()[y][x].getPiece().isWhite()==board.getBoard()[pressedY][pressedX].getPiece().isWhite()){
                         isMoved=false;
                         pressedX=x;
                         pressedY=y;

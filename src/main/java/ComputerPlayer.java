@@ -8,38 +8,71 @@ public class ComputerPlayer extends Player {
     private static int[][] pawnPositions;
     private static int[][] horsePositions;
     private static int[][] rookPositions;
+    private static int[][] bishopPositions;
+    private static int[][] queenPositions;
+    private static int[][] kingPositions;
     private Square maximStart;
     private Square maximEnd;
     static {
         pawnPositions = new int[][]{
-                {-1000, -1000, -1000, -1000, -1000, -1000, -1000, -1000},
-                {-10, -10, -10, -10, -10, -10, -10, -10},
-                {10, 10, 10, 10, 10, 10, 10, 10},
-                {10, 10, 10, 10, 10, 10, 10, 10},
-                {15, 15, 15, 15, 15, 15, 15, 15},
-                {20, 20, 20, 20, 20, 20, 20, 20},
-                {30, 30, 30, 30, 30, 30, 30, 30},
-                {1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000},
+                {0, 0, 0, 0, 0, 0, 0, 0},
+                {5, 10, 10, -20, -20, 10, 10, 5},
+                {5, -5, -10, 0, 0, -10, -5, 5},
+                {0, 0, 0, 20, 20, 0, 0, 0},
+                {5, 5, 10, 25, 25, 10, 5, 5},
+                {10, 10, 20, 30, 30, 20, 10, 10},
+                {50, 50, 50, 50, 50, 50, 50, 50},
+                {0, 0, 0, 0, 0, 0, 0, 0},
         };
         horsePositions = new int[][]{
-                {-10, -10, -10, -10, -10, -10, -10, -10},
-                {-10, -5, -5, -5, -5, -5, -5, -10},
-                {-10, 0, 0, 0, 0, 0, 0, -10},
-                {-10, 0, 10, 10, 10, 10, 0, -10},
-                {-10, 0, 20, 30, 40, 30, 20, -10},
-                {-10, 0, 10, 10, 10, 10, -10},
-                {-10, 0, 0, 0, 0, 0, 0, -10},
-                {-10, -10, -10, -10, -10, -10, -10, -10},
+                {-50, -40, -30, -30, -30, -30, -40, -50},
+                {-40, -20, 0, 5, 5, 0, -20, -40},
+                {-30, 5, 10, 15, 15, 10, 5, -30},
+                {-30, 0, 15, 20, 20, 15, 0, -30},
+                {-30, 0, 15, 20, 20, 15, 0, -30},
+                {-30, 5, 10, 15, 15, 10, 5, -30},
+                {-40, -20, 0, 5, 5, 0, -20, -40},
+                {-50, -40, -30, -30, -30, -30, -40, -50},
         };
         rookPositions = new int[][]{
-                {-10, -10, -10, -10, -10, -10, -10, -10},
-                {-10, -5, -5, -5, -5, -5, -5, -10},
-                {-10, 0, 0, 0, 0, 0, 0, -10},
+                {0, 0, 0, 5, 5, 0, 0, 0},
+                {-5, 0, 0, 0, 0, 0, 0, -5},
+                {-5, 0, 0, 0, 0, 0, 0, -5},
+                {-5, 0, 0, 0, 0, 0, 0, -5},
+                {-5, 0, 0, 0, 0, 0, 0, -5},
+                {-5, 0, 0, 0, 0, 0, 0, -5},
+                {5, 10, 10, 10, 10, 10, 10, 5},
+                {0, 0, 0, 0, 0, 0, 0, 0},
+        };
+        bishopPositions = new int[][]{
+                {-20, -10, -10, -10, -10, -10, -10, -20},
+                {-10, 5, 0, 0, 0, 0, 5, -10},
+                {-10, 10, 10, 10, 10, 10, 10, -10},
                 {-10, 0, 10, 10, 10, 10, 0, -10},
-                {-10, 0, 20, 30, 40, 30, 20, -10},
-                {-10, 0, 10, 10, 10, 10, -10},
+                {-10, 5, 5, 10, 10, 5, 5, -10},
+                {-10, 0, 5, 10, 10, 5, 0, -10},
                 {-10, 0, 0, 0, 0, 0, 0, -10},
-                {-10, -10, -10, -10, -10, -10, -10, -10},
+                {-20, -10, -10, -10, -10, -10, -10, -20},
+        };
+        queenPositions = new int[][]{
+                {-20, -10, -10, -5, -5, -10, -10, -20},
+                {-10, 0, 0, 0, 0, 5, 0, -10},
+                {-10, 0, 5, 5, 5, 5, 5, -10},
+                {-5, 0, 5, 5, 5, 5, 0, 0},
+                {-5, 0, 5, 5, 5, 5, 5, -5},
+                {-10, 0, 5, 5, 5, 5, 0, -10},
+                {-10, 0, 0, 0, 0, 0, 0, -10},
+                {-20, -10, -10, -5, -5, -10, -10, -20},
+        };
+        kingPositions = new int[][]{
+                {20, 30, 10, 0, 0, 10, 30, 20},
+                {20, 20, 0, 0, 0, 0, 20, 20},
+                {-10, -20, -20, -20, -20, -20, -20, -10},
+                {-20, -30, -30, -40, -40, -30, -30, -20},
+                {-30, -40, -40, -50, -50, -40, -40, -30},
+                {-30, -40, -40, -50, -50, -40, -40, -30},
+                {-30, -40, -40, -50, -50, -40, -40, -30},
+                {-30, -40, -40, -50, -50, -40, -40, -30},
         };
     }
 
@@ -65,50 +98,50 @@ public class ComputerPlayer extends Player {
         }
         int maxim = Integer.MIN_VALUE;
         for (Square i : myPieces) {
-            for(Square j : i.getPiece().possibleMoves(board, i)){
-                if (i.getPiece().validMove(board, i, j)){
-                    //se face mutarea
-                    Piece temp = null;
-                    if (j.getPiece() != null){
-                        temp = j.getPiece();
-                    }
-                    //daca e rege/rook trb marcat faptul ca a fost mutat
-                    if (i.getPiece().isKing()){
-                        King temp2 = (King) i.getPiece();
-                        temp2.setHasBeenMoved(true);
-                    }
-                    else if(i.getPiece().getClass().getSimpleName().equals("Rook")){
-                        Rook temp2 = (Rook) i.getPiece();
-                        temp2.setHasBeenMoved(true);
-                    }
+            if (i.getPiece()!=null) {
+                for (Square j : i.getPiece().possibleMoves(board, i)) {
+                    if (i.getPiece().validMove(board, i, j)) {
+                        //se face mutarea
+                        Piece temp = null;
+                        if (j.getPiece() != null) {
+                            temp = j.getPiece();
+                        }
+                        //daca e rege/rook trb marcat faptul ca a fost mutat
+                        if (i.getPiece().isKing()) {
+                            King temp2 = (King) i.getPiece();
+                            temp2.setHasBeenMoved(true);
+                        } else if (i.getPiece().getClass().getSimpleName().equals("Rook")) {
+                            Rook temp2 = (Rook) i.getPiece();
+                            temp2.setHasBeenMoved(true);
+                        }
 
-                    j.setPiece(i.getPiece());
-                    i.setPiece(null);
+                        j.setPiece(i.getPiece());
+                        i.setPiece(null);
 
-                    int score = mini( depth - 1 );
-                    if( score > maxim ) {
-                        maxim = score;
-                        maximStart = i;
-                        maximEnd = j;
-                    }
-                    //dam revert mutarii
-                    i.setPiece(j.getPiece());
-                    if (i.getPiece().isKing()){
-                        King temp2 = (King) i.getPiece();
-                        temp2.setHasBeenMoved(false);
-                    }
-                    else if(i.getPiece().getClass().getSimpleName().equals("Rook")){
-                        Rook temp2 = (Rook) i.getPiece();
-                        temp2.setHasBeenMoved(false);
-                    }
-                    j.setPiece(null);
-                    if (temp != null){
-                        j.setPiece(temp);
+                        int score = mini(depth - 1);
+                        if (score > maxim) {
+                            maxim = score;
+                            maximStart = i;
+                            maximEnd = j;
+                        }
+                        //dam revert mutarii
+                        i.setPiece(j.getPiece());
+                        if (i.getPiece().isKing()) {
+                            King temp2 = (King) i.getPiece();
+                            temp2.setHasBeenMoved(false);
+                        } else if (i.getPiece().getClass().getSimpleName().equals("Rook")) {
+                            Rook temp2 = (Rook) i.getPiece();
+                            temp2.setHasBeenMoved(false);
+                        }
+                        j.setPiece(null);
+                        if (temp != null) {
+                            j.setPiece(temp);
+                        }
                     }
                 }
             }
         }
-        if (depth == 5) {
+        if (depth == 3) {
             if (maximEnd!=null && maximStart!=null && maximStart.getPiece()!=null) {
                 if (maximStart.getPiece().isKing()){
                     King temp2 = (King) maximStart.getPiece();
@@ -118,8 +151,10 @@ public class ComputerPlayer extends Player {
                     Rook temp2 = (Rook) maximStart.getPiece();
                     temp2.setHasBeenMoved(true);
                 }
-                maximEnd.setPiece(maximStart.getPiece());
-                maximStart.setPiece(null);
+                //if (maximStart.getPiece().validMove(board, maximStart, maximEnd)) {
+                    maximEnd.setPiece(maximStart.getPiece());
+                    maximStart.setPiece(null);
+                //}
             }
         }
         return maxim;
@@ -127,7 +162,7 @@ public class ComputerPlayer extends Player {
 
     int mini( int depth ) throws Exception {
         if ( depth == 0 ) {
-            return (-1) * evaluate();
+            return evaluate();
         }
         int minim = Integer.MAX_VALUE;
         for (Square i : enemyPieces) {
@@ -187,55 +222,61 @@ public class ComputerPlayer extends Player {
                     case "Pawn":
                         if (side == this.isWhite) {
                             totalValue += pawnPositions[i.getY()][i.getX()];
-                            totalValue += 10;
+                            totalValue += 100;
                         }
                         else {
-                            //totalValue += (-1) * pawnPositions[i.getY()][i.getX()];
-                            totalValue -= 10;
+                            totalValue += (-1) * pawnPositions[i.getY()][i.getX()];
+                            totalValue -= 100;
                         }
                         break;
                     case "Knight":
                         if (side == this.isWhite) {
                             totalValue += horsePositions[i.getY()][i.getX()];
-                            totalValue += 30;
+                            totalValue += 300;
                         }
                         else {
-                            //totalValue += (-1) * horsePositions[i.getY()][i.getX()];
-                            totalValue -= 30;
+                            totalValue += (-1) * horsePositions[i.getY()][i.getX()];
+                            totalValue -= 300;
                         }
                         break;
                     case "Bishop":
                         if (side == this.isWhite) {
-                            totalValue += 30;
+                            totalValue += 300;
+                            totalValue += bishopPositions[i.getY()][i.getX()];
                         }
                         else {
-                            totalValue -= 30;
+                            totalValue -= 300;
+                            totalValue -= bishopPositions[i.getY()][i.getX()];
                         }
                         break;
                     case "Rook":
                         if (side == this.isWhite) {
                             totalValue += rookPositions[i.getY()][i.getX()];
-                            totalValue += 50;
+                            totalValue += 500;
                         }
                         else {
-                            //totalValue += (-1) * rookPositions[i.getY()][i.getX()];
-                            totalValue -= 50;
+                            totalValue += (-1) * rookPositions[i.getY()][i.getX()];
+                            totalValue -= 500;
                         }
                         break;
                     case "Queen":
                         if (side == this.isWhite) {
-                            totalValue += 90;
+                            totalValue += 900;
+                            totalValue += queenPositions[i.getY()][i.getX()];
                         }
                         else {
-                            totalValue -= 90;
+                            totalValue -= 900;
+                            totalValue -= queenPositions[i.getY()][i.getX()];
                         }
                         break;
                     case "King":
                         if (side == this.isWhite) {
-                            totalValue += 900;
+                            totalValue += 9000;
+                            totalValue += kingPositions[i.getY()][i.getX()];
                         }
                         else {
-                            totalValue -= 900;
+                            totalValue -= 9000;
+                            totalValue -= kingPositions[i.getY()][i.getX()];
                         }
                         break;
                 }
