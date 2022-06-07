@@ -87,7 +87,7 @@ public class Rook extends Piece{
             if (isWhite()){
                 //partea de sus
                 if (box.getY() == 0){
-                    if(board.getBox(0, 4).getPiece().isKing() && board.getBox(0, 4).getPiece().isWhite()==isWhite()){
+                    if(board.getBox(0, 4).getPiece()!=null && board.getBox(0, 4).getPiece().isKing() && board.getBox(0, 4).getPiece().isWhite()==isWhite()){
                         King temp = (King) board.getBox(0, 4).getPiece();
                         if (!temp.hasBeenMoved()){
                             if (box.getX() == 0 && board.getBox(0, 1).getPiece() == null && board.getBox(0, 2).getPiece() == null && board.getBox(0, 3).getPiece() == null){
@@ -103,7 +103,7 @@ public class Rook extends Piece{
             else{
                 //partea de jos
                 if (box.getY() == 7){
-                    if(board.getBox(7, 4).getPiece().isKing() && board.getBox(7, 4).getPiece().isWhite()==isWhite()){
+                    if(board.getBox(7, 4).getPiece()!=null && board.getBox(7, 4).getPiece().isKing() && board.getBox(7, 4).getPiece().isWhite()==isWhite()){
                         King temp = (King) board.getBox(7, 4).getPiece();
                         if (!temp.hasBeenMoved()){
                             if (box.getX() == 0 && board.getBox(7, 1).getPiece() == null && board.getBox(7, 2).getPiece() == null && board.getBox(7, 3).getPiece() == null){

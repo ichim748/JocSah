@@ -67,7 +67,26 @@ public class DrawBoard {
         playVsAI.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                JDialog jd = new JDialog(frame);
+                jd.setLayout(new FlowLayout());
+                jd.setBounds(200,200,200,200);
+                JLabel jLabel = new JLabel("Pawn promoted into: ");
+                jd.add(jLabel);
+                jd.setVisible(false);
+                DrawAIPanel panel = null;
+                try {
+                    panel = new DrawAIPanel(board,jd);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                frame.remove(playLocal);
+                frame.remove(playVsAI);
+                frame.remove(exit);
+                frame.remove(title);
+                frame.setLayout(new BorderLayout());
+                frame.add(panel,BorderLayout.CENTER);
+                frame.validate();
+                frame.repaint();
             }
         });
         exit.addActionListener(new ActionListener() {

@@ -9,7 +9,6 @@ import java.util.List;
 public class King extends Piece{
     private boolean isCastled = false;
     private boolean hasBeenMoved = false;
-
     public King(boolean white) {
         super(white, true);
         Image shape;
