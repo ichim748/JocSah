@@ -76,9 +76,6 @@ public class Board {
                 }
             }
         }
-        System.out.println("Mutari rege alb: ");
-        System.out.println(listaPosibile.toString());
-        System.out.println(listaValide.toString());
         boolean exists = false;
         if (listaValide.isEmpty() && !listaPosibile.isEmpty()) {
             for (int i = 0; i < 8; i++){
@@ -106,9 +103,6 @@ public class Board {
                 }
             }
         }
-        System.out.println("Mutari rege negru: ");
-        System.out.println(listaPosibile1.toString());
-        System.out.println(listaValide1.toString());
         if (listaValide1.isEmpty() && !listaPosibile1.isEmpty()) {
             for (int i = 0; i < 8; i++){
                 for (int j = 0; j < 8; j++){

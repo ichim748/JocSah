@@ -39,7 +39,6 @@ public class Pawn extends Piece{
         //Daca e pe casuta de start => poate merge 2 casute
         int tempX = box.getX();
         int tempY = box.getY();
-        System.out.println(tempX + " " + tempY);
         if(this.isWhite()){
             if(tempY==6){
                 if(board.getBox(tempY-2,tempX).getPiece()==null && board.getBox(tempY-1,tempX).getPiece()==null)

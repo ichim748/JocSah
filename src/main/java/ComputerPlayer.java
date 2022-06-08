@@ -1,5 +1,8 @@
+
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ComputerPlayer extends Player {
     private Board board;
@@ -17,8 +20,8 @@ public class ComputerPlayer extends Player {
         pawnPositions = new int[][]{
                 {0, 0, 0, 0, 0, 0, 0, 0},
                 {5, 10, 10, -20, -20, 10, 10, 5},
-                {5, -5, -10, 0, 0, -10, -5, 5},
-                {0, 0, 0, 20, 20, 0, 0, 0},
+                {5, -50, -50, 0, 0, -50, -50, 5},
+                {0, -20, -20, 20, 20, -20, -20, 0},
                 {5, 5, 10, 25, 25, 10, 5, 5},
                 {10, 10, 20, 30, 30, 20, 10, 10},
                 {50, 50, 50, 50, 50, 50, 50, 50},
@@ -27,10 +30,10 @@ public class ComputerPlayer extends Player {
         horsePositions = new int[][]{
                 {-50, -40, -30, -30, -30, -30, -40, -50},
                 {-40, -20, 0, 5, 5, 0, -20, -40},
-                {-30, 5, 10, 15, 15, 10, 5, -30},
-                {-30, 0, 15, 20, 20, 15, 0, -30},
-                {-30, 0, 15, 20, 20, 15, 0, -30},
-                {-30, 5, 10, 15, 15, 10, 5, -30},
+                {-30, 5, 100, 150, 150, 100, 5, -30},
+                {-30, 0, 150, 200, 200, 150, 0, -30},
+                {-30, 0, 150, 200, 200, 150, 0, -30},
+                {-30, 5, 100, 150, 150, 100, 5, -30},
                 {-40, -20, 0, 5, 5, 0, -20, -40},
                 {-50, -40, -30, -30, -30, -30, -40, -50},
         };
@@ -114,15 +117,16 @@ public class ComputerPlayer extends Player {
                             Rook temp2 = (Rook) i.getPiece();
                             temp2.setHasBeenMoved(true);
                         }
-
                         j.setPiece(i.getPiece());
                         i.setPiece(null);
 
                         int score = mini(depth - 1);
                         if (score > maxim) {
                             maxim = score;
-                            maximStart = i;
-                            maximEnd = j;
+                            if(depth==3){
+                                maximStart = i;
+                                maximEnd = j;
+                            }
                         }
                         //dam revert mutarii
                         i.setPiece(j.getPiece());
@@ -151,10 +155,15 @@ public class ComputerPlayer extends Player {
                     Rook temp2 = (Rook) maximStart.getPiece();
                     temp2.setHasBeenMoved(true);
                 }
-                //if (maximStart.getPiece().validMove(board, maximStart, maximEnd)) {
-                    maximEnd.setPiece(maximStart.getPiece());
-                    maximStart.setPiece(null);
-                //}
+                maximEnd.setPiece(maximStart.getPiece());
+                maximStart.setPiece(null);
+                if(maximEnd.getPiece().getClass().getSimpleName().equals("Pawn") ){
+                    Pawn temp = (Pawn) maximEnd.getPiece();
+                    temp.setMovedTwoSpaces(maximEnd.getY() == maximStart.getY() + 2 && Objects.equals(maximEnd.getX(), maximStart.getX()));
+                }
+                if(maximEnd.getPiece().getClass().getSimpleName().equals("Pawn") && maximStart.getY()==4 && ((board.getBoard()[maximStart.getY()][maximStart.getX()-1].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[maximStart.getY()][maximStart.getX()-1].getPiece().isWhite()!=this.isWhite) || (board.getBoard()[maximStart.getY()][maximStart.getX()+1].getPiece().getClass().getSimpleName().equals("Pawn") && board.getBoard()[maximStart.getY()][maximStart.getX()+1].getPiece().isWhite()!=this.isWhite)) ){
+                    board.getBoard()[maximEnd.getY()-1][maximEnd.getX()].setPiece(null);
+                }
             }
         }
         return maxim;
@@ -168,7 +177,7 @@ public class ComputerPlayer extends Player {
         for (Square i : enemyPieces) {
             if (i.getPiece()!=null) {
                 for (Square j : i.getPiece().possibleMoves(board, i)) {
-                    if (j.getPiece()!=null && i.getPiece().validMove(board, i, j)) {
+                    if (i.getPiece().validMove(board, i, j) ) {
                         //se face mutarea
                         Piece temp = null;
                         if (j.getPiece() != null) {
@@ -241,12 +250,12 @@ public class ComputerPlayer extends Player {
                         break;
                     case "Bishop":
                         if (side == this.isWhite) {
-                            totalValue += 300;
                             totalValue += bishopPositions[i.getY()][i.getX()];
+                            totalValue += 300;
                         }
                         else {
-                            totalValue -= 300;
                             totalValue -= bishopPositions[i.getY()][i.getX()];
+                            totalValue -= 300;
                         }
                         break;
                     case "Rook":

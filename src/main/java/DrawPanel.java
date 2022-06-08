@@ -13,8 +13,10 @@ public class DrawPanel extends JPanel implements MouseListener {
     private int destX;
     private int destY;
     private JDialog jd;
+    private JDialog finishGame;
     private Square pawnToGetPromoted;
-    public DrawPanel(Board board, JDialog jd) throws IOException {
+    private JFrame frame;
+    public DrawPanel(Board board, JDialog jd, JDialog finishGame, JFrame frame) throws IOException {
         this.board=board;
         this.isPressed=false;
         this.isMoved=false;
@@ -22,6 +24,8 @@ public class DrawPanel extends JPanel implements MouseListener {
         this.pressedX=0;
         this.pressedY=0;
         this.jd=jd;
+        this.finishGame = finishGame;
+        this.frame=frame;
         JButton queen = new JButton("Queen");
         JButton rook = new JButton("Rook");
         JButton bishop = new JButton("Bishop");
@@ -167,10 +171,42 @@ public class DrawPanel extends JPanel implements MouseListener {
             }
             try {
                 if (board.isGameEnded() == 1){
-                    System.out.println("Alb a castigat!");
+                    JLabel label = new JLabel("Alb a castigat");
+                    finishGame.add(label);
+                    JButton button = new JButton("Ok");
+                    button.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            finishGame.setVisible(false);
+                            frame.dispose();
+                            try {
+                                DrawBoard drawBoard = new DrawBoard(new Board());
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                            }
+                        }
+                    });
+                    finishGame.add(button);
+                    finishGame.setVisible(true);
                 }
                 else if (board.isGameEnded() == 2){
-                    System.out.println("Negru a castigat!");
+                    JLabel label = new JLabel("Negru a castigat");
+                    finishGame.add(label);
+                    JButton button = new JButton("Ok");
+                    button.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            finishGame.setVisible(false);
+                            frame.dispose();
+                            try {
+                                DrawBoard drawBoard = new DrawBoard(new Board());
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                            }
+                        }
+                    });
+                    finishGame.add(button);
+                    finishGame.setVisible(true);
                 }
                 else if(promotion()){
                     jd.setVisible(true);

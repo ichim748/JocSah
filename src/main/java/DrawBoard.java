@@ -44,13 +44,18 @@ public class DrawBoard {
             public void actionPerformed(ActionEvent e) {
                 JDialog jd = new JDialog(frame);
                 jd.setLayout(new FlowLayout());
-                jd.setBounds(200,200,200,200);
+                Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+                jd.setBounds(dim.width/2,dim.height/2,200,200);
                 JLabel jLabel = new JLabel("Pawn promoted into: ");
                 jd.add(jLabel);
                 jd.setVisible(false);
+                JDialog finishGame = new JDialog(frame);
+                finishGame.setLayout(new FlowLayout());
+                finishGame.setBounds(dim.width/2,dim.height/2,150,150);
+                finishGame.setVisible(false);
                 DrawPanel panel = null;
                 try {
-                    panel = new DrawPanel(board,jd);
+                    panel = new DrawPanel(board,jd,finishGame,frame);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -69,13 +74,18 @@ public class DrawBoard {
             public void actionPerformed(ActionEvent e) {
                 JDialog jd = new JDialog(frame);
                 jd.setLayout(new FlowLayout());
-                jd.setBounds(200,200,200,200);
+                Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+                jd.setBounds(dim.width/2,dim.height/2,200,200);
                 JLabel jLabel = new JLabel("Pawn promoted into: ");
                 jd.add(jLabel);
                 jd.setVisible(false);
+                JDialog finishGame = new JDialog(frame);
+                finishGame.setLayout(new FlowLayout());
+                finishGame.setBounds(dim.width/2,dim.height/2,150,150);
+                finishGame.setVisible(false);
                 DrawAIPanel panel = null;
                 try {
-                    panel = new DrawAIPanel(board,jd);
+                    panel = new DrawAIPanel(board,jd,finishGame,frame);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }

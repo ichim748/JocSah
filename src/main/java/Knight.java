@@ -30,7 +30,6 @@ public class Knight extends Piece{
         List<Square> deReturnat = new ArrayList<>();
         int tempX = box.getX();
         int tempY = box.getY();
-        System.out.println(tempX +" "+ tempY);
         if(tempY>=2){
             if(tempX>=2){
                 if(board.getBox(tempY-1,tempX-2).getPiece()==null || board.getBox(tempY-1,tempX-2).getPiece().isWhite()!=this.isWhite()){
@@ -71,10 +70,8 @@ public class Knight extends Piece{
                     }
                 }
                 if(tempX<=5){
-                    System.out.println("ceva");
                     if(board.getBox(tempY-1,tempX+2).getPiece()==null || board.getBox(tempY-1,tempX+2).getPiece().isWhite()!=this.isWhite()){
                         deReturnat.add(board.getBox(tempY-1,tempX+2));
-                        System.out.println("altceva");
                     }
                 }
             }
